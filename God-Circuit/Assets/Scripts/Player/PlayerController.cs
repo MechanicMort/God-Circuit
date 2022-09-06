@@ -116,25 +116,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Weapons();
         Movement();
         if (Input.GetKeyDown(KeyCode.T))
         {
             lantern.SetActive(!lantern.activeInHierarchy);
-        }
-    }
-
-    private void Weapons()
-    {
-        testGun.transform.position = Vector3.Lerp(testGun.transform.position, gunSpot.transform.position, gunDrag);
-        testGun.transform.rotation =  Quaternion.Lerp(testGun.transform.rotation,gunSpot.transform.rotation,gunDrag);
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            testGun.GetComponent<WeaponFire>().Fire(damageMod,fireRateMod);
-        }
-        if (Input.GetKey(KeyCode.R))
-        {
-            testGun.GetComponent<WeaponFire>().Reload();
         }
     }
 
@@ -156,7 +141,8 @@ public class PlayerController : MonoBehaviour
 
     public void Movement()
     {
-   
+        testGun.transform.position = Vector3.Lerp(testGun.transform.position, gunSpot.transform.position, gunDrag);
+        testGun.transform.rotation = Quaternion.Lerp(testGun.transform.rotation, gunSpot.transform.rotation, gunDrag);
         stamDisplay.fillAmount = Stamina / StaminaMax;
         healthDisplay.fillAmount = hP / hpMax;
         shieldDisplay.fillAmount = shield / shieldMax;
