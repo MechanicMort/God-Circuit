@@ -374,6 +374,7 @@
 "Assets/Scripts/Player/Hardware/IO(Weapons)/BasicRangedWeapon.cs"
 "Assets/Scripts/Player/Hardware/MotherBoards(Slots)/MotherBoard.cs"
 "Assets/Scripts/Player/PlayerController.cs"
+"Assets/Scripts/World/Train.cs"
 -langversion:9.0
 
 /deterministic

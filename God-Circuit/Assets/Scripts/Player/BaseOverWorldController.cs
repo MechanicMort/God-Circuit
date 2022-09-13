@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ public class BaseOverWorldController : MonoBehaviour
     public Transform playerCameraParent;
     CharacterController characterController;
     public float speed;
+    public float jumpSpeed;
     public float gravity = 20.0f;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 60.0f;
@@ -52,6 +54,19 @@ public class BaseOverWorldController : MonoBehaviour
 
     public void Movement()
     {
+        if (transform.parent)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.up), out hit, Mathf.Infinity))
+            {
+                if (hit.transform.tag != "Train")
+                {
+                    transform.SetParent(null);
+                    print("removing parent");
+                }
+            }
+        }
+      
         if (characterController.isGrounded)
         {
             Vector3 forward = transform.TransformDirection(Vector3.forward);
@@ -63,6 +78,10 @@ public class BaseOverWorldController : MonoBehaviour
           
         }
         moveDirection.y -= gravity * Time.deltaTime;
+        if (Input.GetButton("Jump"))
+        {
+            moveDirection.y = jumpSpeed;
+        }
 
         characterController.Move(moveDirection * Time.deltaTime);
 
