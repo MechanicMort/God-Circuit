@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerCanvas
   - Train
+  - MotherBoard
   layers:
   - Default
   - TransparentFX

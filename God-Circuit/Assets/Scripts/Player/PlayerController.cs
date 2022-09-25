@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         StartCoroutine(drainTimer());
         StartCoroutine(DashCoolDown());
+        GetStats();
 
     }
 
@@ -138,6 +139,15 @@ public class PlayerController : MonoBehaviour
         }       
     }
 
+    public void GetStats()
+    {
+        GameObject motherBoard = GameObject.FindGameObjectWithTag("MotherBoard");
+        hpMax = motherBoard.GetComponent<MotherBoard>().hpMax;
+        shieldMax = motherBoard.GetComponent<MotherBoard>().shieldMax;
+        normalSpeed = motherBoard.GetComponent<MotherBoard>().normalSpeed;
+        sprintSpeed = motherBoard.GetComponent<MotherBoard>().sprintSpeed;
+        //clamp all stats after
+    }
 
     public void Movement()
     {
