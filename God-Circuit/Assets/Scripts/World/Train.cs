@@ -21,7 +21,11 @@ public class Train : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.Translate(transform.right * Time.deltaTime * speed);
+        if (canMove)
+        {
+            transform.Translate(transform.right * Time.deltaTime * speed);
+        }
+
     }
     private void OnTriggerEnter(Collider other)
     {

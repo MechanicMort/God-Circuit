@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
     public GameObject lantern;
     public GameObject testGun;
     public GameObject gunSpot;
+    public GameObject motherBoard;
+    public GameObject frontSpot;
+    public GameObject backSpot;
+
     public Camera playerCam;
     public Transform playerCameraParent;
     CharacterController characterController;
@@ -56,9 +60,10 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector]
     public bool canMove = true;
+    public bool inBoardMode = false;
     public bool stamDroppedLow = true;
     public bool isDashing = false;
-
+    public bool frontBack = true;
 
     void Start()
     {
@@ -117,7 +122,28 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Movement();
+        if (!inBoardMode)
+        {
+            Movement();
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            if (frontBack)
+            {
+                frontBack = !frontBack;
+                motherBoard.transform.position = frontSpot.transform.position;
+                inBoardMode = true;
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+            else
+            {
+                frontBack = !frontBack;
+                motherBoard.transform.position = backSpot.transform.position;
+                inBoardMode = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
         if (Input.GetKeyDown(KeyCode.T))
         {
             lantern.SetActive(!lantern.activeInHierarchy);
@@ -204,7 +230,7 @@ public class PlayerController : MonoBehaviour
             float curSpeedY = canMove ? speed * Input.GetAxis("Horizontal") : 0;
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-            if (Input.GetButton("Jump") && Stamina >= 3)
+            if (Input.GetButton("Jump") && Stamina >= 6)
             {
                 Stamina -= 3;
                 drainwait = 100;

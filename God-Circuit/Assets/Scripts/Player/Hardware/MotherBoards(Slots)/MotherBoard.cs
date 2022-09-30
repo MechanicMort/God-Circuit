@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class MotherBoard : MonoBehaviour
 {
@@ -17,11 +18,13 @@ public class MotherBoard : MonoBehaviour
     public GameObject VirusProtection;
 
     [Header("BoardManagement")]
-    public GameObject[] Inventory;
+    public GameObject[] Inventory = new GameObject[6];
+    public GameObject[] InventorySpaces = new GameObject[6];
     public GameObject[] GPUSlots;
     public GameObject[] CPUSlots;
     public GameObject[] RamSlots;
     public GameObject[] PSUSlots;
+    public GameObject heldComponent;
 
     [Header("PlayerStats")]
     public float gunDrag = 5;
@@ -56,6 +59,7 @@ public class MotherBoard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         PartSwap();
     }
 
@@ -110,8 +114,14 @@ public class MotherBoard : MonoBehaviour
             }
             currentPower = Mathf.Clamp(currentPower, 0, maxPower);
         }
-
-        transform.parent.GetComponent<PlayerController>().GetStats();
+        for (int i = 0; i < Inventory.Length; i++)
+        {
+            if (Inventory[i] != null)
+            {
+                Inventory[i].transform.position = InventorySpaces[i].transform.position;
+            }
+        }
+        playerController.GetStats();
     }
 
     public void DrainPower(float drain)
