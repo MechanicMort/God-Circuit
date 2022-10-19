@@ -55,6 +55,8 @@ public class MotherBoard : MonoBehaviour
     [Header("Buffs")]
     public float NooFBuffs;
     public Buff[] buffs;
+    [Header("Bools")]
+    public bool inBuildMode;
 
     // Start is called before the first frame update
     void Start()

@@ -70,6 +70,8 @@
     <Compile Include="Assets\Scripts\Player\Hardware\GPU(WeaponEffects)\GPUBase.cs" />
     <Compile Include="Assets\Scripts\Player\BaseOverWorldController.cs" />
     <Compile Include="Assets\Scripts\Player\Hardware\HUD\HUD.cs" />
+    <Compile Include="Assets\Scripts\Player\UISwapComponents\UIComponentSwap.cs" />
+    <Compile Include="Assets\Scripts\Player\UISwapComponents\UICOmponentManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

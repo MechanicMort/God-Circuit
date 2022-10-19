@@ -135,6 +135,7 @@ public class PlayerController : MonoBehaviour
                 motherBoard.transform.position = frontSpot.transform.position;
                 inBoardMode = true;
                 Cursor.lockState = CursorLockMode.Confined;
+                Time.timeScale = 0.05f;
             }
             else
             {
@@ -142,7 +143,10 @@ public class PlayerController : MonoBehaviour
                 motherBoard.transform.position = backSpot.transform.position;
                 inBoardMode = false;
                 Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1f;
             }
+
+            motherBoard.GetComponent<MotherBoard>().inBuildMode = inBoardMode;
         }
         if (Input.GetKeyDown(KeyCode.T))
         {

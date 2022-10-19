@@ -378,6 +378,8 @@
 "Assets/Scripts/Player/Hardware/PowerSupplies/PowerSupplyBase.cs"
 "Assets/Scripts/Player/Hardware/RAM(BuffSlots)/RamBase.cs"
 "Assets/Scripts/Player/PlayerController.cs"
+"Assets/Scripts/Player/UISwapComponents/UICOmponentManager.cs"
+"Assets/Scripts/Player/UISwapComponents/UIComponentSwap.cs"
 "Assets/Scripts/World/Train.cs"
 -langversion:9.0
 
