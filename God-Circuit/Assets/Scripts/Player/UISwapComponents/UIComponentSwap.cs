@@ -8,6 +8,7 @@ public class UIComponentSwap : MonoBehaviour
     public GameObject component;
     public GameObject[] inventory;
     public UICOmponentManager manager;
+    public GameObject previousSlot;
 
 
     public void SelectComponent()
@@ -26,6 +27,11 @@ public class UIComponentSwap : MonoBehaviour
 
     }
 
+    public void ClearThisSlot()
+    {
+        component = null;
+    }
+
     public void MoveToThisSlot()
     {
         if (component == null)
@@ -34,7 +40,14 @@ public class UIComponentSwap : MonoBehaviour
             {
                 print("swaping");
                 component = manager.selectedComponent;
+                component.transform.position = transform.position;
+                if (component.GetComponentInChildren<UIComponentSwap>().previousSlot != null)
+                {
+                    component.GetComponentInChildren<UIComponentSwap>().previousSlot.GetComponentInChildren<UIComponentSwap>().ClearThisSlot();
+                }
                 manager.selectedComponent = null;
+                manager.ComponentSwapped();
+
             }
         }
      
@@ -62,9 +75,15 @@ public class UIComponentSwap : MonoBehaviour
     {
         inventory = GameObject.FindGameObjectWithTag("MotherBoard").GetComponent<MotherBoard>().Inventory;
         manager = GameObject.FindGameObjectWithTag("MotherBoard").GetComponent<UICOmponentManager>();
+
         if (tag == "Component")
         {
             component = transform.parent.parent.parent.gameObject;
+        }
+        else if (component != null)
+        {
+            component.transform.position = transform.position;
+            component.GetComponentInChildren<UIComponentSwap>().previousSlot = this.gameObject;
         }
     }
 

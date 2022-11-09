@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 
@@ -22,14 +23,16 @@ public class PlayerController : MonoBehaviour
     public Transform playerCameraParent;
     CharacterController characterController;
     [Header("PlayerStats")]
+    public float NoOfBuffs = 0;
+
     public float gunDrag = 5;
-    public float StaminaMax = 100;
-    public float hpMax = 100;
-    public float shieldMax = 100;
+    public float StaminaMax = 0;
+    public float hpMax = 0;
+    public float shieldMax = 0;
 
     public float airJumps = 1;
     public float airJumpsMax = 1;
-    public float dashLength = 100;
+    public float dashLength = 25;
     public float dashCoolDown = 100;
     public float dashStamCost;
 
@@ -41,6 +44,17 @@ public class PlayerController : MonoBehaviour
     public float hP;
     public float hPRecovery;
     public Image shieldDisplay;
+
+    public TextMeshProUGUI hpAmount;
+    public TextMeshProUGUI hpAmountMax;
+
+    public TextMeshProUGUI shieldAmount;
+    public TextMeshProUGUI shieldAmountMax;
+
+    public TextMeshProUGUI staminaAmount;
+    public TextMeshProUGUI staminaAmountMax;
+    
+
     public float shield;
     public float shieldRecovery;
     public float speed;
@@ -120,8 +134,24 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(DashCoolDown());
     }
 
+    private void UpdateUI()
+    {
+        stamDisplay.fillAmount = Stamina / StaminaMax;
+        healthDisplay.fillAmount = hP / hpMax;
+        shieldDisplay.fillAmount = shield / shieldMax;
+        staminaAmount.text = Mathf.RoundToInt(Stamina).ToString();
+        staminaAmountMax.text = Mathf.RoundToInt(StaminaMax).ToString();
+        shieldAmount.text = Mathf.RoundToInt(shield).ToString();
+        shieldAmountMax.text = Mathf.RoundToInt(shieldMax).ToString();
+        hpAmount.text = Mathf.RoundToInt(hP).ToString();
+        hpAmountMax.text = Mathf.RoundToInt(hpMax).ToString();
+
+    }
+
     private void Update()
     {
+
+        UpdateUI();
         if (!inBoardMode)
         {
             Movement();
@@ -176,6 +206,9 @@ public class PlayerController : MonoBehaviour
         shieldMax = motherBoard.GetComponent<MotherBoard>().shieldMax;
         normalSpeed = motherBoard.GetComponent<MotherBoard>().normalSpeed;
         sprintSpeed = motherBoard.GetComponent<MotherBoard>().sprintSpeed;
+        StaminaMax = motherBoard.GetComponent<MotherBoard>().StaminaMax;
+        NoOfBuffs = motherBoard.GetComponent<MotherBoard>().NooFBuffs;
+
         //clamp all stats after
     }
 
@@ -183,9 +216,7 @@ public class PlayerController : MonoBehaviour
     {
         testGun.transform.position = Vector3.Lerp(testGun.transform.position, gunSpot.transform.position, gunDrag);
         testGun.transform.rotation = Quaternion.Lerp(testGun.transform.rotation, gunSpot.transform.rotation, gunDrag);
-        stamDisplay.fillAmount = Stamina / StaminaMax;
-        healthDisplay.fillAmount = hP / hpMax;
-        shieldDisplay.fillAmount = shield / shieldMax;
+
 
         Stamina = Mathf.Clamp(Stamina, 0, StaminaMax);
         hP = Mathf.Clamp(hP, 0, hpMax);

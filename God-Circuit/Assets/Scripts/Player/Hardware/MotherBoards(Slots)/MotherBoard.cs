@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -10,12 +11,19 @@ public class MotherBoard : MonoBehaviour
 
     [Header("Components")]
     public GameObject[] GPU;
+    public int GPUsInstalled;
     public GameObject[] CPU;
+    public int CPUsInstalled;
     public GameObject[] Ram;
+    public int RamInstalled;
     public GameObject[] PSU;
+    public int PSUInstalled;
     public GameObject HUD;
+    public int HUDInstalled;
     public GameObject OutPutDevice;
+    public int OutPutDeviceInstalled;
     public GameObject VirusProtection;
+    public int VirusProtectionInstalled;
 
     [Header("BoardManagement")]
     public GameObject[] Inventory = new GameObject[6];
@@ -68,33 +76,73 @@ public class MotherBoard : MonoBehaviour
     public void PartSwap()
     {
       NooFBuffs = 0;
-      StaminaMax = 0;
-      hpMax = 0;
-      shieldMax = 0;
-      dashStamCost = 0;
-      staminaDrain = 0;
-      staminaRecovery = 0;
+      StaminaMax = 10;
+      hpMax = 10;
+      shieldMax = 5;
+      dashStamCost = 15;
+      staminaDrain = 3;
+      staminaRecovery = 1;
       hPRecovery = 0;
-      shieldRecovery = 0;
-      maxPower= 0;
-        if (GPU!= null)
+      shieldRecovery = 1;
+      maxPower= 15;
+        GPUsInstalled = 0;
+        CPUsInstalled = 0;
+        RamInstalled = 0;
+        VirusProtectionInstalled = 0;
+        HUDInstalled = 0;
+        OutPutDeviceInstalled = 0;
+        for (int i = 0; i < GPUSlots.Length; i++)
         {
-            for (int i = 0; i < GPU.Length; i++)
+            if (GPUSlots[i].GetComponentInChildren<UIComponentSwap>().component != null)
+            {
+                GPU[GPUsInstalled] = GPUSlots[i].GetComponentInChildren<UIComponentSwap>().component;
+                GPUsInstalled += 1;
+            }
+        }
+        for (int i = 0; i < RamSlots.Length; i++)
+        {
+            if (RamSlots[i].GetComponentInChildren<UIComponentSwap>().component != null)
+            {
+                Ram[RamInstalled] = RamSlots[i].GetComponentInChildren<UIComponentSwap>().component;
+                RamInstalled += 1;
+            }
+        }
+        for (int i = 0; i < CPUSlots.Length; i++)
+        {
+            if (CPUSlots[i].GetComponentInChildren<UIComponentSwap>().component != null)
+            {
+                CPU[CPUsInstalled] = CPUSlots[i].GetComponentInChildren<UIComponentSwap>().component;
+                CPUsInstalled += 1;
+            }
+        }
+        for (int i = 0; i < PSUSlots.Length; i++)
+        {
+            if (PSUSlots[i].GetComponentInChildren<UIComponentSwap>().component != null)
+            {
+                PSU[PSUInstalled] = PSUSlots[i].GetComponentInChildren<UIComponentSwap>().component;
+                PSUInstalled += 1;
+            }
+        }
+
+
+        if (GPUsInstalled > 0)
+        {
+            for (int i = 0; i < GPUsInstalled; i++)
             {
                 GPU[i].transform.position = GPUSlots[i].transform.position;
             }
         }
-        if (Ram != null)
+        if (RamInstalled > 0)
         {
-            for (int i = 0; i < Ram.Length; i++)
+            for (int i = 0; i < RamInstalled; i++)
             {
                 Ram[i].transform.position = RamSlots[i].transform.position;
                 NooFBuffs += Ram[i].GetComponent<RamBase>().noOfBuffs;
             }
         }
-        if (CPU != null)
+        if (CPUsInstalled > 0)
         {
-            for (int i = 0; i < CPU.Length; i++)
+            for (int i = 0; i < CPUsInstalled; i++)
             {
                 CPU[i].transform.position = CPUSlots[i].transform.position;
                 StaminaMax += CPU[i].GetComponent<CPUBase>().StaminaMax;
@@ -107,9 +155,9 @@ public class MotherBoard : MonoBehaviour
                 shieldRecovery += CPU[i].GetComponent<CPUBase>().shieldRecovery;
             }
         }
-        if (PSU != null)
+        if (PSUInstalled > 0)
         {
-            for (int i = 0; i < PSU.Length; i++)
+            for (int i = 0; i < PSUInstalled; i++)
             {
                 PSU[i].transform.position = PSUSlots[i].transform.position;
                 maxPower += PSU[i].GetComponent<PowerSupplyBase>().PowerSupplied;

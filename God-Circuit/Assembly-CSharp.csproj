@@ -60,18 +60,18 @@
     <Compile Include="Assets\Scripts\Player\Hardware\RAM(BuffSlots)\RamBase.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PickUPs\EnableCircuits.cs" />
+    <Compile Include="Assets\Scripts\Player\UISwapComponents\UICOmponentManager.cs" />
     <Compile Include="Assets\Scripts\Player\Hardware\IO(Weapons)\BasicRangedWeapon.cs" />
     <Compile Include="Assets\Scripts\Player\Hardware\GPU(WeaponEffects)\GPUExample.cs" />
     <Compile Include="Assets\Scripts\Player\Hardware\CPU(CoreStats)\CPUBase.cs" />
     <Compile Include="Assets\Scripts\Player\Buffs\Buff.cs" />
+    <Compile Include="Assets\Scripts\Player\UISwapComponents\UIComponentSwap.cs" />
     <Compile Include="Assets\Scripts\World\Train.cs" />
     <Compile Include="Assets\Scripts\Player\Hardware\PowerSupplies\PowerSupplyBase.cs" />
     <Compile Include="Assets\Scripts\Player\Hardware\MotherBoards(Slots)\MotherBoard.cs" />
     <Compile Include="Assets\Scripts\Player\Hardware\GPU(WeaponEffects)\GPUBase.cs" />
     <Compile Include="Assets\Scripts\Player\BaseOverWorldController.cs" />
     <Compile Include="Assets\Scripts\Player\Hardware\HUD\HUD.cs" />
-    <Compile Include="Assets\Scripts\Player\UISwapComponents\UIComponentSwap.cs" />
-    <Compile Include="Assets\Scripts\Player\UISwapComponents\UICOmponentManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
