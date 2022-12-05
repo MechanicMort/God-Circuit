@@ -21,6 +21,16 @@ public class Train : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //inplement this with stations
+        //currentFloor = Mathf.Round(transform.position.y);
+        //if (currentFloor == targetFloor)
+        //{
+        //    OpenDoor();
+        //    if (player.transform.parent == this.transform)
+        //    {
+        //        player.transform.SetParent(null, true);
+        //    }
+      //  }
         if (canMove)
         {
             transform.Translate(transform.right * Time.deltaTime * speed);
@@ -37,7 +47,16 @@ public class Train : MonoBehaviour
             print("Parent");
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.tag == "Player")
+        {
+            other.transform.SetParent(null, true);
+            //other.GetComponent<CharacterController>().enabled = false;
+            print("Parent");
+        }
+    }
 
-    
-  
+
+
 }

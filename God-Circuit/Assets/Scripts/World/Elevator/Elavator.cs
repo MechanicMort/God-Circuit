@@ -14,6 +14,8 @@ public class Elavator : MonoBehaviour
     public GameObject rightDoorOpenPosition;
     public GameObject rightDoorClosedPosition;
 
+    private BoxCollider Collider;
+
     public float targetFloor;
     public float currentFloor;
     public float elevatorSpeed;
@@ -22,19 +24,23 @@ public class Elavator : MonoBehaviour
     void Start()
     {
         elevatorParent = transform.parent.gameObject;
+        Collider = GetComponent<BoxCollider>();
+        player = GameObject.FindWithTag("Player");
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
-
+      
         if (other.transform.tag == "Player")
         {
+            player = other.gameObject;
             other.transform.SetParent(this.transform, true);
             //other.GetComponent<CharacterController>().enabled = false;
             print("Parent");
         }
-    }
 
+    }
     public void OpenDoor()
     {
         rightDoor.transform.position = rightDoorOpenPosition.transform.position;
@@ -69,11 +75,15 @@ public class Elavator : MonoBehaviour
      
     void FixedUpdate()
     {
+        
         currentFloor = Mathf.Round(transform.position.y);
         if (currentFloor == targetFloor)
         {
             OpenDoor();
-
+            if (player.transform.parent == this.transform)
+            {
+                player.transform.SetParent(null, true);
+            }
         }
         else
         {
