@@ -19,24 +19,9 @@ public class ElevatorButton : MonoBehaviour
     {
        //  debugHolder = Instantiate(DEBUGCUBE);
     }
-    void Update()
+
+    public void Update()
     {
-        if ( Input.GetKeyDown(KeyCode.F))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit,100))
-            {
-
-               // debugHolder.transform.position = hit.point;
-                if (hit.collider == GetComponent<Collider>())
-                {
-                    myEleva.GetComponent<Elavator>().MoveToFloor(myFloor);
-
-                }
-            }
-              
-        }
         if (myEleva.GetComponent<Elavator>().currentFloor == myFloor)
         {
             leftDoor.transform.position = leftDoorOpen.transform.position;
@@ -47,5 +32,12 @@ public class ElevatorButton : MonoBehaviour
             leftDoor.transform.position = leftDoorClosed.transform.position;
             rightDoor.transform.position = rightDoorClosed.transform.position;
         }
+    }
+
+    public void ActivateButton()
+    {
+        myEleva.GetComponent<Elavator>().MoveToFloor(myFloor);
+ 
+       
     }
 }

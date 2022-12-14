@@ -148,9 +148,28 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void InvokeThings()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+
+                // debugHolder.transform.position = hit.point;
+                if (hit.collider.GetComponent<InvokeInteraction>())
+                {
+                    hit.collider.GetComponent<InvokeInteraction>();
+                }
+            }
+
+        }
+    }
+
     private void Update()
     {
-
+        InvokeThings();
         UpdateUI();
         if (!inBoardMode)
         {

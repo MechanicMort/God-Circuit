@@ -8,21 +8,9 @@ public class ElevatorControllButtonPressed : MonoBehaviour
     public float myFloor;
 
     // Update is called once per frame
-    void Update()
+  
+    public void MoveToFloor()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100))
-            {
-                if (hit.collider == GetComponent<Collider>())
-                {
-                    myControlPanel.GetComponent<ElevatorControlPanel>().MoveToFloor(myFloor);
-
-                }
-            }
-
-        }
+        myControlPanel.GetComponent<ElevatorControlPanel>().MoveToFloor(myFloor);
     }
 }

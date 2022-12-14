@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 
@@ -15,6 +16,7 @@ public class BaseOverWorldController : MonoBehaviour
     public GameObject lantern;
     public Camera playerCam;
     public Transform playerCameraParent;
+
     CharacterController characterController;
     public float speed;
     public float jumpSpeed;
@@ -26,6 +28,7 @@ public class BaseOverWorldController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
     public bool hasTorch = false;
+    public bool faster = false;
 
 
     void Start()
@@ -37,14 +40,36 @@ public class BaseOverWorldController : MonoBehaviour
 
     }
 
-  
 
 
 
+    public void InvokeThings()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+
+            print("Casting");
+    
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+
+                // debugHolder.transform.position = hit.point;
+                if (hit.collider.GetComponent<InvokeInteraction>())
+                {
+                    hit.collider.GetComponent<InvokeInteraction>().InvokeTheInteraction();
+                    print("Starting Invoke Chain");
+                }
+            }
+
+        }
+    }
 
     private void Update()
     {
         Movement();
+        InvokeThings();
         if (Input.GetKeyDown(KeyCode.T) && hasTorch)
         {
             lantern.SetActive(!lantern.activeInHierarchy);
@@ -59,21 +84,42 @@ public class BaseOverWorldController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.up), out hit, Mathf.Infinity))
             {
-                if (hit.transform.tag != "Train")
+                if (hit.transform.tag != "Train" && hit.transform.tag != "Elevator")
                 {
-                    transform.SetParent(null);
-                    print("removing parent");
+                    //transform.SetParent(null);
+                   // print("removing parent");
                 }
             }
         }
-      
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+
+            faster = true;
+        }
+        else
+        {
+            faster = false;
+        }
         if (characterController.isGrounded)
         {
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 right = transform.TransformDirection(Vector3.right);
 
-            float curSpeedX = canMove ? speed * Input.GetAxis("Vertical") : 0;
-            float curSpeedY = canMove ? speed * Input.GetAxis("Horizontal") : 0;
+
+            float curSpeedX;
+            float curSpeedY;
+            if (faster)
+            {
+                 curSpeedX = canMove ? speed * 1.3f * Input.GetAxis("Vertical") : 0;
+                 curSpeedY = canMove ? speed * 1.3f * Input.GetAxis("Horizontal") : 0;
+            }
+            else
+            {
+                 curSpeedX = canMove ? speed * Input.GetAxis("Vertical") : 0;
+                 curSpeedY = canMove ? speed * Input.GetAxis("Horizontal") : 0;
+            }
+
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
           
         }
