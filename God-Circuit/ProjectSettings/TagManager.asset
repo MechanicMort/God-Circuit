@@ -8,6 +8,7 @@ TagManager:
   - Train
   - MotherBoard
   - Component
+  - Elevator
   layers:
   - Default
   - TransparentFX
