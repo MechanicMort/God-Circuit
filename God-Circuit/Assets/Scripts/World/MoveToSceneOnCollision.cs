@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MoveToSceneOnCollision : MonoBehaviour
 {
-    public int scene1 ;
+    public string scene1 ;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(scene1));
+            //will add loading and also load animaiton of door opening
+            SceneManager.LoadScene(scene1,LoadSceneMode.Single);
         }
     }
 

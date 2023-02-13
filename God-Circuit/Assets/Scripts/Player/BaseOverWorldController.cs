@@ -10,8 +10,12 @@ using UnityEngine.UI;
 
 
 [RequireComponent(typeof(CharacterController))]
+
+
 public class BaseOverWorldController : MonoBehaviour
 {
+
+    
     [Header("GameObjects")]
     public GameObject lantern;
     public Camera playerCam;
@@ -33,11 +37,10 @@ public class BaseOverWorldController : MonoBehaviour
 
     void Start()
     {
+        DontDestroyOnLoad(this);
         characterController = GetComponent<CharacterController>();
         rotation.y = transform.eulerAngles.y;
-        Cursor.lockState = CursorLockMode.Locked;
-
-
+        Cursor.lockState = CursorLockMode.Locked;      
     }
 
 
