@@ -81,9 +81,9 @@ public class MotherBoard : MonoBehaviour
       shieldMax = 5;
       dashStamCost = 15;
       staminaDrain = 3;
-      staminaRecovery = 1;
+      staminaRecovery = 0.09f;
       hPRecovery = 0;
-      shieldRecovery = 1;
+      shieldRecovery = 0.09f;
       maxPower= 15;
         GPUsInstalled = 0;
         CPUsInstalled = 0;

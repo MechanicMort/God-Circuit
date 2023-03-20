@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public GameObject lantern;
     public GameObject testGun;
     public GameObject gunSpot;
-    public GameObject motherBoard;
+    public MotherBoard motherBoard;
     public GameObject frontSpot;
     public GameObject backSpot;
 
@@ -57,8 +57,11 @@ public class PlayerController : MonoBehaviour
 
     public float shield;
     public float shieldRecovery;
+    public float shieldRecoverySpeed = 100;
+    public float stamRecoverySpeed = 100;
     public float speed;
     public float sprintSpeed = 16.5f;
+    public float crouchSpeed = 6.5f;
     public float normalSpeed = 10.5f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
@@ -67,6 +70,7 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDirection = Vector3.zero;
     Vector2 rotation = Vector2.zero;
     public float drainwait = 100;
+    public float shieldDrainWait = 100;
 
     [Header("WeaponStats")]
     public float fireRateMod;
@@ -74,6 +78,7 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector]
     public bool canMove = true;
+    public bool isCrouched = false;
     public bool inBoardMode = false;
     public bool stamDroppedLow = true;
     public bool isDashing = false;
@@ -81,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        motherBoard = GameObject.FindGameObjectWithTag("MotherBoard").GetComponent<MotherBoard>();
         Stamina = StaminaMax;
         hP = hpMax;
         shield = shieldMax;
@@ -89,33 +95,45 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         StartCoroutine(drainTimer());
         StartCoroutine(DashCoolDown());
-        GetStats();
+
+        motherBoard.PartSwap();
 
     }
 
     public void TakeDamage(float damage)
     {
-        if (shield > 0 )
+        if (damage > 0)
         {
-            float leftovers = 0;
-            shield -= damage;
-            if (shield < 0)
+            shieldDrainWait = shieldRecoverySpeed;
+            if (shield > 0)
             {
-                leftovers = -shield;
-                hP -= leftovers;
+                float leftovers = 0;
+                shield -= damage;
+                if (shield < 0)
+                {
+                    leftovers = -shield;
+                    hP -= leftovers;
+                }
+            }
+            else
+            {
+                hP -= damage;
             }
         }
         else
         {
             hP -= damage;
         }
+    
     }
 
     private IEnumerator drainTimer()
     {
-        drainwait =  Mathf.Clamp(drainwait, 0, 100);
+        drainwait =  Mathf.Clamp(drainwait, 0, stamRecoverySpeed);
+        shieldDrainWait = Mathf.Clamp(shieldDrainWait, 0, shieldRecoverySpeed);
         yield return new WaitForSeconds(0.01f);
         drainwait -= 1;
+        shieldDrainWait -= 1;
         StartCoroutine(drainTimer());
 
     }
@@ -220,7 +238,7 @@ public class PlayerController : MonoBehaviour
 
     public void GetStats()
     {
-        GameObject motherBoard = GameObject.FindGameObjectWithTag("MotherBoard");
+
         hpMax = motherBoard.GetComponent<MotherBoard>().hpMax;
         shieldMax = motherBoard.GetComponent<MotherBoard>().shieldMax;
         normalSpeed = motherBoard.GetComponent<MotherBoard>().normalSpeed;
@@ -228,6 +246,12 @@ public class PlayerController : MonoBehaviour
         StaminaMax = motherBoard.GetComponent<MotherBoard>().StaminaMax;
         NoOfBuffs = motherBoard.GetComponent<MotherBoard>().NooFBuffs;
 
+        staminaRecovery = motherBoard.staminaRecovery;
+        shieldRecovery = motherBoard.shieldRecovery;
+        hPRecovery = motherBoard.hPRecovery;
+
+
+        print("Stats Changed");
         //clamp all stats after
     }
 
@@ -236,24 +260,29 @@ public class PlayerController : MonoBehaviour
         testGun.transform.position = Vector3.Lerp(testGun.transform.position, gunSpot.transform.position, gunDrag);
         testGun.transform.rotation = Quaternion.Lerp(testGun.transform.rotation, gunSpot.transform.rotation, gunDrag);
 
+        if (shieldDrainWait <= 0)
+        {
+            shield += shieldRecovery * Time.deltaTime;
+        }
+
 
         Stamina = Mathf.Clamp(Stamina, 0, StaminaMax);
         hP = Mathf.Clamp(hP, 0, hpMax);
         shield = Mathf.Clamp(shield, 0, shieldMax);
 
-        if (Input.GetKey(KeyCode.LeftShift) && Stamina != 0 && !stamDroppedLow)
+        if (Input.GetKey(KeyCode.LeftShift) && Stamina != 0 && !stamDroppedLow && !isCrouched)
         {
 
             speed = sprintSpeed; //Mathf.Lerp(speed,sprintSpeed,0.02f);
-            Stamina -= staminaDrain;
-            drainwait = 100;
+            Stamina -= staminaDrain * Time.deltaTime;
+            drainwait = stamRecoverySpeed;
         }
         else
         {
             speed = normalSpeed;
             if (drainwait <= 0)
             {
-                Stamina += staminaRecovery;
+                Stamina += staminaRecovery * Time.deltaTime;
                 if (Stamina <= 6)
                 {
                     stamDroppedLow = true;
@@ -270,11 +299,24 @@ public class PlayerController : MonoBehaviour
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 right = transform.TransformDirection(Vector3.right);
           
-            if (Input.GetKey(KeyCode.LeftControl) && dashCoolDown <= 0)
+            if (Input.GetKey(KeyCode.LeftControl) && dashCoolDown <= 0 && !isCrouched)
             {
                 dashCoolDown = 100;
                 drainwait = 100;
                 Dash();
+            }
+            else if (Input.GetKey(KeyCode.C))
+            {
+
+                speed = crouchSpeed;
+                isCrouched = true;
+                transform.localScale = new Vector3(1, 0.7f, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector3(1, 1.4f, 1);
+                isCrouched = false;
+                speed = normalSpeed;
             }
             if (isDashing)
             {
@@ -284,7 +326,7 @@ public class PlayerController : MonoBehaviour
             float curSpeedY = canMove ? speed * Input.GetAxis("Horizontal") : 0;
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-            if (Input.GetButton("Jump") && Stamina >= 6)
+            if (Input.GetButton("Jump") && Stamina >= 6 && !isCrouched)
             {
                 Stamina -= 3;
                 drainwait = 100;
@@ -294,6 +336,7 @@ public class PlayerController : MonoBehaviour
 
         if (!characterController.isGrounded)
         {
+            isCrouched = false;
             if (Input.GetButtonDown("Jump") && canMove && Stamina >= 5 && airJumps > 0)
             {
                 airJumps -= 1;

@@ -15,7 +15,7 @@ public class GPUExample : GPUBase
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && !GameObject.FindGameObjectWithTag("MotherBoard").GetComponent<MotherBoard>().inBuildMode)
         {
-            FireWeapon(projectile);
+            //FireWeapon(projectile);
         }
     }
 

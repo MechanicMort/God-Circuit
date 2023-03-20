@@ -29,6 +29,7 @@ public class CPUBase : MonoBehaviour
     public float speed;
     public float sprintSpeed = 16.5f;
     public float normalSpeed = 10.5f;
+    public float creouchSpeed = 6.5f;
 
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
