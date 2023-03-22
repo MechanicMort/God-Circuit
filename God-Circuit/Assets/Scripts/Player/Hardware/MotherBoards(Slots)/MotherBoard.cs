@@ -24,6 +24,7 @@ public class MotherBoard : MonoBehaviour
     public int OutPutDeviceInstalled;
     public GameObject VirusProtection;
     public int VirusProtectionInstalled;
+    public GameObject projectile;
 
     [Header("BoardManagement")]
     public GameObject[] Inventory = new GameObject[6];
@@ -59,7 +60,10 @@ public class MotherBoard : MonoBehaviour
     public float drainwait = 100;
     [Header("Power")]
     public float maxPower;
+    public float powerRegen;
     public float currentPower;
+    public float powerPerShot;
+    public float fireRate;
     [Header("Buffs")]
     public float NooFBuffs;
     public Buff[] buffs;
@@ -71,6 +75,7 @@ public class MotherBoard : MonoBehaviour
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         PartSwap();
+        StartCoroutine(PowerRegen());
     }
 
     public void PartSwap()
@@ -87,6 +92,7 @@ public class MotherBoard : MonoBehaviour
       maxPower= 15;
         GPUsInstalled = 0;
         CPUsInstalled = 0;
+        PSUInstalled = 0;
         RamInstalled = 0;
         VirusProtectionInstalled = 0;
         HUDInstalled = 0;
@@ -129,7 +135,13 @@ public class MotherBoard : MonoBehaviour
         {
             for (int i = 0; i < GPUsInstalled; i++)
             {
+                if (i==0)
+                {
+                    projectile = GPU[0].GetComponent<GPUBase>().projectile;
+                    fireRate = GPU[0].GetComponent<GPUBase>().fireRate;
+                }
                 GPU[i].transform.position = GPUSlots[i].transform.position;
+                powerPerShot += GPU[i].GetComponent<GPUBase>().powerDraw;
             }
         }
         if (RamInstalled > 0)
@@ -161,6 +173,7 @@ public class MotherBoard : MonoBehaviour
             {
                 PSU[i].transform.position = PSUSlots[i].transform.position;
                 maxPower += PSU[i].GetComponent<PowerSupplyBase>().PowerSupplied;
+                powerRegen += PSU[i].GetComponent<PowerSupplyBase>().PowerRegen;
             }
             currentPower = Mathf.Clamp(currentPower, 0, maxPower);
         }
@@ -179,21 +192,35 @@ public class MotherBoard : MonoBehaviour
         currentPower -= drain;
         currentPower = Mathf.Clamp(currentPower, 0, maxPower);
     }
-
-    public void FireWeapon(GameObject projectile)
+    private IEnumerator PowerRegen()
     {
-        OutPutDevice.GetComponent<BasicRangedWeapon>().FireWeapon(projectile);
+        yield return new WaitForSeconds(0.01f);
+        currentPower += powerRegen;
+        currentPower = Mathf.Clamp(currentPower, 0, maxPower);
+        StartCoroutine(PowerRegen());
+
+
+    }
+
+
+        public void FireWeapon( )
+    {
+        
+        if(GPUsInstalled > 0)
+        {
+            print("Should Fire");
+            if (currentPower > powerPerShot)
+            {
+                OutPutDevice.GetComponent<BasicRangedWeapon>().FireWeapon(projectile);
+                DrainPower(powerPerShot);
+            }
+
+        }
     }
 
     public void AddPower(float power)
     {
         currentPower += power;
         currentPower = Mathf.Clamp(currentPower, 0, maxPower);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
     }
 }

@@ -36,24 +36,12 @@ public class PlayerController : MonoBehaviour
     public float dashCoolDown = 100;
     public float dashStamCost;
 
-    public Image stamDisplay;
     public float Stamina;
     public float staminaDrain;
     public float staminaRecovery;
-    public Image healthDisplay;
+
     public float hP;
     public float hPRecovery;
-    public Image shieldDisplay;
-
-    public TextMeshProUGUI hpAmount;
-    public TextMeshProUGUI hpAmountMax;
-
-    public TextMeshProUGUI shieldAmount;
-    public TextMeshProUGUI shieldAmountMax;
-
-    public TextMeshProUGUI staminaAmount;
-    public TextMeshProUGUI staminaAmountMax;
-    
 
     public float shield;
     public float shieldRecovery;
@@ -71,6 +59,23 @@ public class PlayerController : MonoBehaviour
     Vector2 rotation = Vector2.zero;
     public float drainwait = 100;
     public float shieldDrainWait = 100;
+
+    [Header("UITHINGIES")]
+    public Image stamDisplay;
+
+    public Image healthDisplay;
+
+    public Image shieldDisplay;
+
+    public TextMeshProUGUI hpAmount;
+    public TextMeshProUGUI hpAmountMax;
+
+    public TextMeshProUGUI shieldAmount;
+    public TextMeshProUGUI shieldAmountMax;
+
+    public TextMeshProUGUI staminaAmount;
+    public TextMeshProUGUI staminaAmountMax;
+
 
     [Header("WeaponStats")]
     public float fireRateMod;
@@ -192,6 +197,8 @@ public class PlayerController : MonoBehaviour
         if (!inBoardMode)
         {
             Movement();
+            Combat();
+
         }
 
         if (Input.GetKeyDown(KeyCode.B))
@@ -218,6 +225,17 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             lantern.SetActive(!lantern.activeInHierarchy);
+        }
+    }
+
+
+
+    private void Combat()
+    {
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            print("Fire Weapon");
+            motherBoard.FireWeapon();
         }
     }
 

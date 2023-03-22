@@ -12,6 +12,7 @@ public class HPPickup : MonoBehaviour
         if (other.tag == "Player")
         {
             other.GetComponent<PlayerController>().TakeDamage(-healAmount);
+            Destroy(this.gameObject);
         }
     }
 }

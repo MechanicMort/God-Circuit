@@ -5,6 +5,6 @@ using UnityEngine;
 public class PowerSupplyBase : MonoBehaviour
 {
     public float PowerSupplied;
-  
+    public float PowerRegen;
     
 }

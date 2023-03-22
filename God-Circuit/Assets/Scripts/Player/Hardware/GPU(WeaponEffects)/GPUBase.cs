@@ -5,6 +5,7 @@ using UnityEngine;
 public class GPUBase : MonoBehaviour
 {
     public float powerDraw;
+    public float fireRate;
     public GameObject projectile;
     public GameObject motherBoard;
 
@@ -22,14 +23,5 @@ public class GPUBase : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void FireWeapon(GameObject projectileFired)
-    {
-        motherBoard.GetComponent<MotherBoard>().DrainPower(powerDraw);
-        motherBoard.GetComponent<MotherBoard>().FireWeapon(projectile);
-
-
-
     }
 }

@@ -433,7 +433,7 @@ MonoBehaviour:
   lantern: {fileID: 814534647097269120}
   testGun: {fileID: 2538237657393615436}
   gunSpot: {fileID: 814534646450253805}
-  motherBoard: {fileID: 9176059695245787760}
+  motherBoard: {fileID: 7393357902481821189}
   frontSpot: {fileID: 814534647942067441}
   backSpot: {fileID: 814534646675398093}
   playerCam: {fileID: 814534647253556065}
@@ -464,17 +464,22 @@ MonoBehaviour:
   staminaAmountMax: {fileID: 0}
   shield: 0
   shieldRecovery: 0
+  shieldRecoverySpeed: 100
+  stamRecoverySpeed: 100
   speed: 0
   sprintSpeed: 23
+  crouchSpeed: 6.5
   normalSpeed: 12
   jumpSpeed: 35
   gravity: 90
   lookSpeed: 2
   lookXLimit: 60
   drainwait: 0
+  shieldDrainWait: 100
   fireRateMod: 5
   damageMod: 6
   canMove: 1
+  isCrouched: 0
   inBoardMode: 0
   stamDroppedLow: 1
   isDashing: 0
@@ -924,9 +929,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2538237657794540071}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9176059695245787760 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6660340195041964119, guid: 5574ea94663db474381282a5f2148ddd,
+--- !u!114 &7393357902481821189 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5018094535782005794, guid: 5574ea94663db474381282a5f2148ddd,
     type: 3}
   m_PrefabInstance: {fileID: 2538237657794540071}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3919324749e9dd2438577a2defadece2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
