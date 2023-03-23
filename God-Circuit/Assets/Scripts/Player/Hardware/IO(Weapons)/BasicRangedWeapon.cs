@@ -16,7 +16,10 @@ public class BasicRangedWeapon : MonoBehaviour
         
     }
 
-    private IEnumerator FireRate
+    private IEnumerator FireRate()
+    {
+        yield return new WaitForSeconds(0.1f);
+    }
 
     public void FireWeapon(GameObject projectile)
     {
