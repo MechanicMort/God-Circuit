@@ -2,18 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RamBase : MonoBehaviour
+public class RamBase : UIComponentSwap
 {
     public float noOfBuffs;
+    public float powerDraw;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Component")]
+    public string componentName;
+    public string componentType;
 
-    // Update is called once per frame
-    void Update()
+
+
+    void GetComponent(PassValues passValues)
     {
-        
+        if (passValues.expectedComponent == componentType)
+        {
+            print("Correct Slot");
+            passValues.thisUICS.amICorrectType = true;
+        }
+        else
+        {
+            print("WrongSlot");
+        }
+
     }
 }

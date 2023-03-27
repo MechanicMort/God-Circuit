@@ -2,18 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GPUBase : UIComponentSwap
+public class FanBase : UIComponentSwap
 {
-    public float powerDraw;
-    public float fireRate;
-    public GameObject projectile;
-    public GameObject motherBoard;
+    public float heatDispurtion;
 
     [Header("Component")]
     public string componentName;
     public string componentType;
-
-
+    public float powerDraw;
 
     void GetComponent(PassValues passValues)
     {
@@ -31,11 +27,12 @@ public class GPUBase : UIComponentSwap
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
-    public void GPUSetUP()
+
+    void FanSetUp()
     {
-        motherBoard = transform.parent.gameObject;
+
     }
 
     // Update is called once per frame

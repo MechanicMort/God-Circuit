@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CPUBase : MonoBehaviour
+public class CPUBase : UIComponentSwap
 {
+
+    [Header("Component")]
+    public string componentName;
+    public string componentType;
+    public float powerDraw;
     [Header("PlayerStats")]
     public float StaminaMax = 100;
 
@@ -38,15 +43,26 @@ public class CPUBase : MonoBehaviour
     public float lookXLimit = 60.0f;
     public float drainwait = 100;
 
-    // Start is called before the first frame update
-    void Start()
+
+    void Test()
     {
-        
+        print("Yeah need to do smth lese");
     }
 
-    // Update is called once per frame
-    void Update()
+    void GetComponent(PassValues passValues)
     {
-        
+        if (passValues.expectedComponent == componentType)
+        {
+            print("Correct Slot");
+            passValues.thisUICS.amICorrectType = true;
+        }
+        else
+        {
+            print("Component Type:  "+ componentType);
+            print("passValues Component Type:  " + passValues.expectedComponent);
+            print(passValues.expectedComponent+"   "+ componentType);
+            print("WrongSlot");
+        }
+
     }
 }

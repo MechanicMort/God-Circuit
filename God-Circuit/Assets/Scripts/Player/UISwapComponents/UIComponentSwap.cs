@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UIComponentSwap;
 
 public class UIComponentSwap : MonoBehaviour
 {
@@ -9,7 +10,17 @@ public class UIComponentSwap : MonoBehaviour
     public GameObject[] inventory;
     public UICOmponentManager manager;
     public GameObject previousSlot;
+    public string expectedComponent;
+    public bool amICorrectType = false;
 
+
+    public struct PassValues{
+        public UIComponentSwap thisUICS;
+        public string expectedComponent;
+
+
+        }
+    public PassValues passValues = new PassValues();
 
     public void SelectComponent()
     {
@@ -36,7 +47,8 @@ public class UIComponentSwap : MonoBehaviour
     {
         if (component == null)
         {
-            if (manager.selectedComponent != null /* check in the right spot*/ )
+            manager.selectedComponent.SendMessage("GetComponent", passValues);
+            if (manager.selectedComponent != null && amICorrectType ||  expectedComponent == "FreeSlot"/* check in the right spot*/ )
             {
                 print("swaping");
                 component = manager.selectedComponent;
@@ -50,8 +62,8 @@ public class UIComponentSwap : MonoBehaviour
 
             }
         }
-     
-    }
+          amICorrectType = false;
+}
 
     public void MoveToInventory()
     {
@@ -76,6 +88,8 @@ public class UIComponentSwap : MonoBehaviour
         inventory = GameObject.FindGameObjectWithTag("MotherBoard").GetComponent<MotherBoard>().Inventory;
         manager = GameObject.FindGameObjectWithTag("MotherBoard").GetComponent<UICOmponentManager>();
 
+        passValues.thisUICS = this;
+        passValues.expectedComponent = expectedComponent;
         if (tag == "Component")
         {
             component = transform.parent.parent.parent.gameObject;

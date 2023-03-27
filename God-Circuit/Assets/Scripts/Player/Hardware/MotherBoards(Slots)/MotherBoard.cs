@@ -20,6 +20,8 @@ public class MotherBoard : MonoBehaviour
     public int PSUInstalled;
     public GameObject HUD;
     public int HUDInstalled;
+    public GameObject[] Fans;
+    public int FansInstalled;
     public GameObject OutPutDevice;
     public int OutPutDeviceInstalled;
     public GameObject VirusProtection;
@@ -32,6 +34,7 @@ public class MotherBoard : MonoBehaviour
     public GameObject[] GPUSlots;
     public GameObject[] CPUSlots;
     public GameObject[] RamSlots;
+    public GameObject[] FanSlots;
     public GameObject[] PSUSlots;
     public GameObject heldComponent;
 
@@ -64,6 +67,10 @@ public class MotherBoard : MonoBehaviour
     public float currentPower;
     public float powerPerShot;
     public float fireRate;
+
+    [Header("Heat")]
+    public float heatDispersion;
+    public float totalHeat;
     [Header("Buffs")]
     public float NooFBuffs;
     public Buff[] buffs;
@@ -75,7 +82,7 @@ public class MotherBoard : MonoBehaviour
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         PartSwap();
-        StartCoroutine(PowerRegen());
+        StartCoroutine(Tickers());
     }
 
     public void PartSwap()
@@ -105,6 +112,14 @@ public class MotherBoard : MonoBehaviour
                 GPUsInstalled += 1;
             }
         }
+        for (int i = 0; i < FanSlots.Length; i++)
+        {
+            if (FanSlots[i].GetComponentInChildren<UIComponentSwap>().component != null)
+            {
+                Fans[FansInstalled] = FanSlots[i].GetComponentInChildren<UIComponentSwap>().component;
+                FansInstalled += 1;
+            }
+        }
         for (int i = 0; i < RamSlots.Length; i++)
         {
             if (RamSlots[i].GetComponentInChildren<UIComponentSwap>().component != null)
@@ -130,6 +145,19 @@ public class MotherBoard : MonoBehaviour
             }
         }
 
+
+
+        if (FansInstalled > 0)
+        {
+            for (int i = 0; i < FansInstalled; i++)
+            {
+                if (i == 0)
+                {
+                    heatDispersion += Fans[i].GetComponent<FanBase>().heatDispurtion;
+                }
+                Fans[i].transform.position = FanSlots[i].transform.position;
+            }
+        }
 
         if (GPUsInstalled > 0)
         {
@@ -192,12 +220,14 @@ public class MotherBoard : MonoBehaviour
         currentPower -= drain;
         currentPower = Mathf.Clamp(currentPower, 0, maxPower);
     }
-    private IEnumerator PowerRegen()
+    private IEnumerator Tickers()
     {
         yield return new WaitForSeconds(0.01f);
+        totalHeat -= heatDispersion;
         currentPower += powerRegen;
         currentPower = Mathf.Clamp(currentPower, 0, maxPower);
-        StartCoroutine(PowerRegen());
+        totalHeat = Mathf.Clamp(totalHeat, 0, 100);
+        StartCoroutine(Tickers());
 
 
     }
