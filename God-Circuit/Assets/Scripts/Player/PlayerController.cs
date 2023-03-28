@@ -66,7 +66,6 @@ public class PlayerController : MonoBehaviour
     public Image healthDisplay;
 
     public Image shieldDisplay;
-
     public TextMeshProUGUI hpAmount;
     public TextMeshProUGUI hpAmountMax;
 
@@ -75,6 +74,18 @@ public class PlayerController : MonoBehaviour
 
     public TextMeshProUGUI staminaAmount;
     public TextMeshProUGUI staminaAmountMax;
+
+
+
+    public Image powerDisplay;
+    public Image currentPowerUsage;
+    public TextMeshProUGUI currentPowerUsageAmount;
+    public TextMeshProUGUI maxPower;
+
+
+    public Image heatDisplay;
+    public TextMeshProUGUI currentHeat;
+    public TextMeshProUGUI heatMax;
 
 
     [Header("WeaponStats")]
@@ -168,6 +179,11 @@ public class PlayerController : MonoBehaviour
         shieldAmountMax.text = Mathf.RoundToInt(shieldMax).ToString();
         hpAmount.text = Mathf.RoundToInt(hP).ToString();
         hpAmountMax.text = Mathf.RoundToInt(hpMax).ToString();
+
+        maxPower.text = motherBoard.maxPower.ToString();
+        currentPowerUsage.fillAmount = motherBoard.currentPower/ motherBoard.maxPower;
+        currentPowerUsageAmount.text = motherBoard.currentPower.ToString();
+
 
     }
 

@@ -6,6 +6,7 @@ public class RamBase : UIComponentSwap
 {
     public float noOfBuffs;
     public float powerDraw;
+    public float heatGeneration;
     // Start is called before the first frame update
     [Header("Component")]
     public string componentName;

@@ -9,6 +9,7 @@ public class CPUBase : UIComponentSwap
     public string componentName;
     public string componentType;
     public float powerDraw;
+    public float heatGeneration;
     [Header("PlayerStats")]
     public float StaminaMax = 100;
 
@@ -43,11 +44,6 @@ public class CPUBase : UIComponentSwap
     public float lookXLimit = 60.0f;
     public float drainwait = 100;
 
-
-    void Test()
-    {
-        print("Yeah need to do smth lese");
-    }
 
     void GetComponent(PassValues passValues)
     {

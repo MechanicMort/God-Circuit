@@ -47,20 +47,24 @@ public class UIComponentSwap : MonoBehaviour
     {
         if (component == null)
         {
-            manager.selectedComponent.SendMessage("GetComponent", passValues);
-            if (manager.selectedComponent != null && amICorrectType ||  expectedComponent == "FreeSlot"/* check in the right spot*/ )
+            if (manager.selectedComponent != null)
             {
-                print("swaping");
-                component = manager.selectedComponent;
-                component.transform.position = transform.position;
-                if (component.GetComponentInChildren<UIComponentSwap>().previousSlot != null)
+                manager.selectedComponent.SendMessage("GetComponent", passValues);
+                if (amICorrectType || expectedComponent == "FreeSlot"/* check in the right spot*/ )
                 {
-                    component.GetComponentInChildren<UIComponentSwap>().previousSlot.GetComponentInChildren<UIComponentSwap>().ClearThisSlot();
-                }
-                manager.selectedComponent = null;
-                manager.ComponentSwapped();
+                    print("swaping");
+                    component = manager.selectedComponent;
+                    component.transform.position = transform.position;
+                    if (component.GetComponentInChildren<UIComponentSwap>().previousSlot != null)
+                    {
+                        component.GetComponentInChildren<UIComponentSwap>().previousSlot.GetComponentInChildren<UIComponentSwap>().ClearThisSlot();
+                    }
+                    manager.selectedComponent = null;
+                    manager.ComponentSwapped();
 
+                }
             }
+          
         }
           amICorrectType = false;
 }

@@ -63,6 +63,7 @@ public class MotherBoard : MonoBehaviour
     public float drainwait = 100;
     [Header("Power")]
     public float maxPower;
+    public float componentPowerDraw;
     public float powerRegen;
     public float currentPower;
     public float powerPerShot;
@@ -97,6 +98,7 @@ public class MotherBoard : MonoBehaviour
       hPRecovery = 0;
       shieldRecovery = 0.09f;
       maxPower= 15;
+        componentPowerDraw = 0;
         GPUsInstalled = 0;
         CPUsInstalled = 0;
         PSUInstalled = 0;
@@ -154,6 +156,8 @@ public class MotherBoard : MonoBehaviour
                 if (i == 0)
                 {
                     heatDispersion += Fans[i].GetComponent<FanBase>().heatDispurtion;
+                    componentPowerDraw += Fans[i].GetComponent<FanBase>().powerDraw;
+                    
                 }
                 Fans[i].transform.position = FanSlots[i].transform.position;
             }
@@ -167,9 +171,11 @@ public class MotherBoard : MonoBehaviour
                 {
                     projectile = GPU[0].GetComponent<GPUBase>().projectile;
                     fireRate = GPU[0].GetComponent<GPUBase>().fireRate;
+                    powerPerShot = GPU[0].GetComponent<GPUBase>().powerDrawPerShot;
                 }
+                componentPowerDraw += GPU[i].GetComponent<GPUBase>().powerDraw;
                 GPU[i].transform.position = GPUSlots[i].transform.position;
-                powerPerShot += GPU[i].GetComponent<GPUBase>().powerDraw;
+
             }
         }
         if (RamInstalled > 0)
@@ -177,6 +183,7 @@ public class MotherBoard : MonoBehaviour
             for (int i = 0; i < RamInstalled; i++)
             {
                 Ram[i].transform.position = RamSlots[i].transform.position;
+                componentPowerDraw += Ram[i].GetComponent<RamBase>().powerDraw;
                 NooFBuffs += Ram[i].GetComponent<RamBase>().noOfBuffs;
             }
         }
@@ -193,6 +200,7 @@ public class MotherBoard : MonoBehaviour
                 staminaRecovery += CPU[i].GetComponent<CPUBase>().staminaRecovery;
                 hPRecovery += CPU[i].GetComponent<CPUBase>().hPRecovery;
                 shieldRecovery += CPU[i].GetComponent<CPUBase>().shieldRecovery;
+                componentPowerDraw += CPU[i].GetComponent<CPUBase>().powerDraw;
             }
         }
         if (PSUInstalled > 0)
@@ -220,11 +228,13 @@ public class MotherBoard : MonoBehaviour
         currentPower -= drain;
         currentPower = Mathf.Clamp(currentPower, 0, maxPower);
     }
+
     private IEnumerator Tickers()
     {
         yield return new WaitForSeconds(0.01f);
         totalHeat -= heatDispersion;
         currentPower += powerRegen;
+        DrainPower(componentPowerDraw);
         currentPower = Mathf.Clamp(currentPower, 0, maxPower);
         totalHeat = Mathf.Clamp(totalHeat, 0, 100);
         StartCoroutine(Tickers());
@@ -238,11 +248,15 @@ public class MotherBoard : MonoBehaviour
         
         if(GPUsInstalled > 0)
         {
-            print("Should Fire");
+
             if (currentPower > powerPerShot)
             {
-                OutPutDevice.GetComponent<BasicRangedWeapon>().FireWeapon(projectile);
-                DrainPower(powerPerShot);
+                print("Should Fire");
+                if (OutPutDevice.GetComponent<BasicRangedWeapon>().FireWeapon(projectile))
+                {
+                    DrainPower(powerPerShot);
+                } 
+               
             }
 
         }

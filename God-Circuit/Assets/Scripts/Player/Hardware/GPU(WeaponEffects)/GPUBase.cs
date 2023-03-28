@@ -5,6 +5,8 @@ using UnityEngine;
 public class GPUBase : UIComponentSwap
 {
     public float powerDraw;
+    public float powerDrawPerShot;
+    public float heatGeneration;
     public float fireRate;
     public GameObject projectile;
     public GameObject motherBoard;
