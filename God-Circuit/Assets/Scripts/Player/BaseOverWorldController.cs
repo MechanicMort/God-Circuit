@@ -14,10 +14,13 @@ using UnityEngine.UI;
 
 public class BaseOverWorldController : MonoBehaviour
 {
-
+    public Vector3 phoneRat;
     
     [Header("GameObjects")]
     public GameObject lantern;
+    public GameObject phone;
+    public GameObject phoneUpSpot;
+    public GameObject phoneDownSpot;
     public Camera playerCam;
     public Transform playerCameraParent;
 
@@ -32,6 +35,8 @@ public class BaseOverWorldController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
     public bool hasTorch = false;
+    public bool hasPhone = false;
+    public bool phoneIsDown = false;
     public bool faster = false;
 
 
@@ -58,7 +63,7 @@ public class BaseOverWorldController : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100))
             {
 
-                // debugHolder.transform.position = hit.point;
+            //    debugHolder.transform.position = hit.point;
                 if (hit.collider.GetComponent<InvokeInteraction>())
                 {
                     hit.collider.GetComponent<InvokeInteraction>().InvokeTheInteraction();
@@ -76,6 +81,31 @@ public class BaseOverWorldController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T) && hasTorch)
         {
             lantern.SetActive(!lantern.activeInHierarchy);
+        }
+        if (Input.GetKeyDown(KeyCode.I) && hasPhone)
+        {
+                phoneIsDown = !phoneIsDown;
+        }
+        if ( hasPhone)
+        {
+            if (phoneIsDown)
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    phone.GetComponent<Phone>().OnOff();
+                }
+                Time.timeScale = 0.05f;
+                phone.transform.position = phoneUpSpot.transform.position;
+                phone.transform.rotation = phoneUpSpot.transform.rotation;
+                phone.transform.Rotate(phoneRat);
+            }
+            else
+            {
+                phone.GetComponent<Phone>().power = false;
+                Time.timeScale = 1f;
+                phone.transform.position = phoneDownSpot.transform.position;
+                phone.transform.rotation = phoneDownSpot.transform.rotation;
+            }
         }
     }
 

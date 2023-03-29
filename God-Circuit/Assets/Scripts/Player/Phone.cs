@@ -20,6 +20,16 @@ public class Phone : MonoBehaviour
     {
         
     }
+    public void OnOff()
+    {
+        power = !power;
+    }
+    public void PickUpPhone()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<BaseOverWorldController>().phone = this.gameObject;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<BaseOverWorldController>().hasPhone = true;
+        this.transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform);
+    }
 
     // Update is called once per frame
     void Update()

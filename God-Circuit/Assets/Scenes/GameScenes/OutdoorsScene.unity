@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2050.3206, g: 1647.6155, b: 1460.3966, a: 1}
+  m_IndirectSpecularColor: {r: 2051.4963, g: 1648.8987, b: 1461.5802, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -28577,7 +28577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3394194e23970ac4dba34804bcbe2217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene1: OutdoorsScene
+  scene1: PlayerAppartMent
 --- !u!65 &828980829
 BoxCollider:
   m_ObjectHideFlags: 0
