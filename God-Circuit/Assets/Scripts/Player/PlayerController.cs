@@ -170,21 +170,28 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateUI()
     {
+
+
+        //stamina bar
         stamDisplay.fillAmount = Stamina / StaminaMax;
-        healthDisplay.fillAmount = hP / hpMax;
-        shieldDisplay.fillAmount = shield / shieldMax;
         staminaAmount.text = Mathf.RoundToInt(Stamina).ToString();
         staminaAmountMax.text = Mathf.RoundToInt(StaminaMax).ToString();
+        //shield bar
+        shieldDisplay.fillAmount = shield / shieldMax;
         shieldAmount.text = Mathf.RoundToInt(shield).ToString();
         shieldAmountMax.text = Mathf.RoundToInt(shieldMax).ToString();
+        // health bar
+        healthDisplay.fillAmount = hP / hpMax;
         hpAmount.text = Mathf.RoundToInt(hP).ToString();
         hpAmountMax.text = Mathf.RoundToInt(hpMax).ToString();
-
+        //power Bar
         maxPower.text = motherBoard.maxPower.ToString();
         currentPowerUsage.fillAmount = motherBoard.currentPower/ motherBoard.maxPower;
-        currentPowerUsageAmount.text = motherBoard.currentPower.ToString();
-
-
+        currentPowerUsageAmount.text = Mathf.RoundToInt(motherBoard.currentPower).ToString();
+        // heat bar
+        heatMax.text = motherBoard.maxHeat.ToString();
+        heatDisplay.fillAmount = motherBoard.totalHeat / motherBoard.maxHeat;
+        currentHeat.text = Mathf.RoundToInt(motherBoard.totalHeat).ToString();
     }
 
     public void InvokeThings()

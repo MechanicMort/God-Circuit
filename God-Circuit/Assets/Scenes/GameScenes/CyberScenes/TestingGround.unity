@@ -1305,6 +1305,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 374441445513844241, guid: 345a9767ffee60f4e823f53ecb3ba77c,
+        type: 3}
+      propertyPath: m_Name
+      value: HeatAmount
+      objectReference: {fileID: 0}
+    - target: {fileID: 4503404824771278964, guid: 345a9767ffee60f4e823f53ecb3ba77c,
+        type: 3}
+      propertyPath: m_Name
+      value: HeatDisplay
+      objectReference: {fileID: 0}
     - target: {fileID: 4754517197860729206, guid: 345a9767ffee60f4e823f53ecb3ba77c,
         type: 3}
       propertyPath: m_RootOrder
@@ -1363,7 +1373,12 @@ PrefabInstance:
     - target: {fileID: 4754517197860729207, guid: 345a9767ffee60f4e823f53ecb3ba77c,
         type: 3}
       propertyPath: m_Name
-      value: PLayerUI and PLayer HOlder
+      value: PlayerUI and Player Holder
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186351842556126974, guid: 345a9767ffee60f4e823f53ecb3ba77c,
+        type: 3}
+      propertyPath: m_Name
+      value: HeatAmountMax
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

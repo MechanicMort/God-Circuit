@@ -72,6 +72,7 @@ public class MotherBoard : MonoBehaviour
     [Header("Heat")]
     public float heatDispersion;
     public float totalHeat;
+    public float maxHeat = 100;
     [Header("Buffs")]
     public float NooFBuffs;
     public Buff[] buffs;
@@ -173,6 +174,7 @@ public class MotherBoard : MonoBehaviour
                     fireRate = GPU[0].GetComponent<GPUBase>().fireRate;
                     powerPerShot = GPU[0].GetComponent<GPUBase>().powerDrawPerShot;
                 }
+                totalHeat += GPU[i].GetComponent<GPUBase>().heatGeneration;
                 componentPowerDraw += GPU[i].GetComponent<GPUBase>().powerDraw;
                 GPU[i].transform.position = GPUSlots[i].transform.position;
 
@@ -183,6 +185,7 @@ public class MotherBoard : MonoBehaviour
             for (int i = 0; i < RamInstalled; i++)
             {
                 Ram[i].transform.position = RamSlots[i].transform.position;
+                totalHeat += Ram[i].GetComponent<RamBase>().heatGeneration;
                 componentPowerDraw += Ram[i].GetComponent<RamBase>().powerDraw;
                 NooFBuffs += Ram[i].GetComponent<RamBase>().noOfBuffs;
             }
@@ -191,7 +194,10 @@ public class MotherBoard : MonoBehaviour
         {
             for (int i = 0; i < CPUsInstalled; i++)
             {
+                //set position in board
                 CPU[i].transform.position = CPUSlots[i].transform.position;
+
+                //player stats these add onto the base stat (((if there are multiple cpus have to take out stuff like move speed and prio slot one)))
                 StaminaMax += CPU[i].GetComponent<CPUBase>().StaminaMax;
                 hpMax += CPU[i].GetComponent<CPUBase>().hpMax;
                 shieldMax += CPU[i].GetComponent<CPUBase>().shieldMax;
@@ -200,7 +206,10 @@ public class MotherBoard : MonoBehaviour
                 staminaRecovery += CPU[i].GetComponent<CPUBase>().staminaRecovery;
                 hPRecovery += CPU[i].GetComponent<CPUBase>().hPRecovery;
                 shieldRecovery += CPU[i].GetComponent<CPUBase>().shieldRecovery;
+
+                //component stuff
                 componentPowerDraw += CPU[i].GetComponent<CPUBase>().powerDraw;
+                totalHeat += CPU[i].GetComponent<CPUBase>().heatGeneration;
             }
         }
         if (PSUInstalled > 0)
