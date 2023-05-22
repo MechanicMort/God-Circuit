@@ -38,6 +38,8 @@ public class BaseOverWorldController : MonoBehaviour
     public bool hasPhone = false;
     public bool phoneIsDown = false;
     public bool faster = false;
+    public bool canTurn = false;
+
 
 
     void Start()
