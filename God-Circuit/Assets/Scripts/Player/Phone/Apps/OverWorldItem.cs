@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/OverWorldItem", order = 2)]
+public class OverWorldItem : ScriptableObject
 {
-    public OverWorldItem[] inventory = new OverWorldItem[6];
     // Start is called before the first frame update
     void Start()
     {

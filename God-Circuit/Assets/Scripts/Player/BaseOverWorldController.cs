@@ -92,19 +92,23 @@ public class BaseOverWorldController : MonoBehaviour
         {
             if (phoneIsDown)
             {
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (Input.GetKeyDown(KeyCode.P))
                 {
                     phone.GetComponent<Phone>().OnOff();
                 }
                 Time.timeScale = 0.05f;
+                Cursor.lockState = CursorLockMode.Confined;
                 phone.transform.position = phoneUpSpot.transform.position;
                 phone.transform.rotation = phoneUpSpot.transform.rotation;
+                canMove = false;
                 phone.transform.Rotate(phoneRat);
             }
             else
             {
                 phone.GetComponent<Phone>().power = false;
                 Time.timeScale = 1f;
+                canMove = true;
+                Cursor.lockState = CursorLockMode.Locked;
                 phone.transform.position = phoneDownSpot.transform.position;
                 phone.transform.rotation = phoneDownSpot.transform.rotation;
             }

@@ -14,6 +14,9 @@ public class ConvoLogic : MonoBehaviour
     string wantedText;
     int iterator =0;
     public TMP_Text convoText;
+    public TMP_Text choiceOne;
+    public TMP_Text choiceTwo;
+    public TMP_Text choiceThree;
     private bool inConvo = false;
 
     public void ConvoToggle(ConvoSO convoSO,GameObject newcCamSpot)
