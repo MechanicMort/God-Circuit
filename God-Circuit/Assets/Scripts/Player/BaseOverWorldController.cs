@@ -23,6 +23,8 @@ public class BaseOverWorldController : MonoBehaviour
     public GameObject phoneDownSpot;
     public Camera playerCam;
     public Transform playerCameraParent;
+    public GameObject[] inventory = new GameObject[8];
+    
 
     CharacterController characterController;
     public float speed;

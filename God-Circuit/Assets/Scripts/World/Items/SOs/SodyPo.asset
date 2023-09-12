@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7c7b4edfa43c9c45926e1074713e4a9, type: 3}
+  m_Name: SodyPo
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 21300000, guid: 7e144b8ea54c4c24d9d65441df95ee19, type: 3}
+  myItem: {fileID: 4829906312169874287, guid: ca4ecd5da9164f84daf7059232e773bf, type: 3}
+  itemCanvas: {fileID: 0}
+  itemCost: 1.32
+  itemName: SodyPop

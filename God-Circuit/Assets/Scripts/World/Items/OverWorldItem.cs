@@ -10,5 +10,7 @@ public class OverWorldItem : ScriptableObject
 
     public Sprite itemImage;
     public GameObject myItem;
-    
+    public Canvas itemCanvas;
+    public float itemCost;
+    public string itemName;
 }
