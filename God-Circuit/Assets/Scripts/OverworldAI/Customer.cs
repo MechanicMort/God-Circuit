@@ -6,6 +6,7 @@ public class Customer : BaseAI
 {
 
     public GameObject shoppingCart;
+    public GameObject checkOut;
     private float Kindness;
     private string Name;
     private string Description;
@@ -22,6 +23,7 @@ public class Customer : BaseAI
     {
         items[0] = "SodyPop";
         itemsWanted[0] = "SodyPop";
+        checkOut = GameObject.FindGameObjectWithTag("CheckOut");
         StartOperations();
 
         
@@ -63,25 +65,46 @@ public class Customer : BaseAI
                 //add shopping cart
                 shopItem.transform.SetParent(shoppingCart.transform);
                 shopItem.transform.position = shoppingCart.transform.position;
+                locationsCompleted++;
             }
-            locationsCompleted++;
+
         }
 
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<SpotInLine>())
+        {
+            checkOut.GetComponent<CheckOut>().UnLoadCart(shoppingCart);
+        }
+    }
 
 
-   override public IEnumerator MoveAI()
+    override public IEnumerator MoveAI()
     {
         //create path
         if (pathLocations.Count == 0)
         {
             CreatePath();
         }
-        myAgent.destination = pathLocations[locationsCompleted].transform.position;
-        yield return new WaitForSeconds(1);
+        if (locationsCompleted == itemsWanted.Length)
+        {
+            GoToChechout();
+        }
+        else
+        {
+            myAgent.destination = pathLocations[locationsCompleted].transform.position;
 
+        }
+        yield return new WaitForSeconds(1);
+        StartCoroutine(MoveAI());
+    }
+
+    private void GoToChechout()
+    {
+        myAgent.destination = checkOut.GetComponent<CheckOut>().GetLinePos().position;
     }
 
 

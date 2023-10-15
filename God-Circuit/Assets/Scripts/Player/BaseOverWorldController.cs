@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -27,6 +26,7 @@ public class BaseOverWorldController : MonoBehaviour
     
 
     CharacterController characterController;
+    [Header("Nums")]
     public float speed;
     public float jumpSpeed;
     public float gravity = 20.0f;
@@ -34,8 +34,8 @@ public class BaseOverWorldController : MonoBehaviour
     public float lookXLimit = 60.0f;
     Vector3 moveDirection = Vector3.zero;
     Vector2 rotation = Vector2.zero;
-    [HideInInspector]
     public bool canMove = true;
+    [HideInInspector]
     public bool hasTorch = false;
     public bool hasPhone = false;
     public bool phoneIsDown = false;
@@ -48,8 +48,7 @@ public class BaseOverWorldController : MonoBehaviour
     {
         DontDestroyOnLoad(this);
         characterController = GetComponent<CharacterController>();
-        rotation.y = transform.eulerAngles.y;
-        Cursor.lockState = CursorLockMode.Locked;      
+        rotation.y = transform.eulerAngles.y;     
     }
 
 
