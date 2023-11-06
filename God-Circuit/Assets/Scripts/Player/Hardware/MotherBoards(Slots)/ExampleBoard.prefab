@@ -257,6 +257,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -359,6 +360,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -767,6 +769,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &320162984
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,126 +876,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &405512299
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 405512300}
-  - component: {fileID: 405512303}
-  - component: {fileID: 405512302}
-  - component: {fileID: 405512301}
-  - component: {fileID: 405512304}
-  m_Layer: 0
-  m_Name: Gun
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &405512300
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405512299}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.15, y: 0.6024771, z: -1.11}
-  m_LocalScale: {x: 0.3694325, y: 0.6117781, z: 2.1579}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 425081960}
-  m_Father: {fileID: 9171466970765233742}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &405512303
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405512299}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &405512302
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405512299}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 257
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &405512301
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405512299}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &405512304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405512299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e227dfea970af444bd6ab47649352a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunBarrel: {fileID: 425081960}
 --- !u!1 &416536196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,37 +1011,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &425081959
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 425081960}
-  m_Layer: 0
-  m_Name: barrel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &425081960
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 425081959}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0.65}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 405512300}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &426351916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,6 +1402,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &541907270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,6 +1555,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &546735359
 GameObject:
   m_ObjectHideFlags: 0
@@ -2089,6 +1946,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a282a371bdfc778448e324ee924562be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  component: {fileID: 0}
+  inventory: []
+  manager: {fileID: 0}
+  previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
+  componentName: 
+  componentType: 
+  powerDraw: 0
+  heatGeneration: 0
   StaminaMax: 100
   hpMax: 150
   shieldMax: 100
@@ -2107,6 +1974,7 @@ MonoBehaviour:
   speed: 0
   sprintSpeed: 16.5
   normalSpeed: 10.5
+  creouchSpeed: 6.5
   jumpSpeed: 8
   gravity: 20
   lookSpeed: 2
@@ -2169,6 +2037,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -2365,6 +2234,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &694228573
 GameObject:
   m_ObjectHideFlags: 0
@@ -2834,6 +2705,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -3402,6 +3274,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -3504,6 +3377,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -3700,6 +3574,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &1012286319
 GameObject:
   m_ObjectHideFlags: 0
@@ -3928,6 +3804,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &1055428654
 GameObject:
   m_ObjectHideFlags: 0
@@ -4048,7 +3926,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b048e8487e5b04aabe4f5221c433b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  component: {fileID: 0}
+  inventory: []
+  manager: {fileID: 0}
+  previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
   noOfBuffs: 1
+  powerDraw: 0
+  heatGeneration: 0
+  componentName: 
+  componentType: 
 --- !u!114 &1055428656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4061,7 +3949,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b048e8487e5b04aabe4f5221c433b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  component: {fileID: 0}
+  inventory: []
+  manager: {fileID: 0}
+  previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
   noOfBuffs: 1
+  powerDraw: 0
+  heatGeneration: 0
+  componentName: 
+  componentType: 
 --- !u!1 &1068160248
 GameObject:
   m_ObjectHideFlags: 0
@@ -4422,7 +4320,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b048e8487e5b04aabe4f5221c433b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  component: {fileID: 0}
+  inventory: []
+  manager: {fileID: 0}
+  previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
   noOfBuffs: 1
+  powerDraw: 0
+  heatGeneration: 0
+  componentName: 
+  componentType: 
 --- !u!114 &1100044652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4435,7 +4343,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b048e8487e5b04aabe4f5221c433b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  component: {fileID: 0}
+  inventory: []
+  manager: {fileID: 0}
+  previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
   noOfBuffs: 1
+  powerDraw: 0
+  heatGeneration: 0
+  componentName: 
+  componentType: 
 --- !u!1 &1160043779
 GameObject:
   m_ObjectHideFlags: 0
@@ -4722,6 +4640,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &1179349835
 GameObject:
   m_ObjectHideFlags: 0
@@ -4779,6 +4699,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -5003,6 +4924,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -5199,6 +5121,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &1317822328
 GameObject:
   m_ObjectHideFlags: 0
@@ -5501,6 +5425,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -5697,6 +5622,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &1538600926
 GameObject:
   m_ObjectHideFlags: 0
@@ -6392,7 +6319,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88cb0dbd8320fd409c741e9f9cfba6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  component: {fileID: 0}
+  inventory: []
+  manager: {fileID: 0}
+  previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
   PowerSupplied: 70
+  PowerRegen: 0
+  componentName: 
+  componentType: 
 --- !u!1 &1864364000
 GameObject:
   m_ObjectHideFlags: 0
@@ -6649,6 +6585,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &1922466919
 GameObject:
   m_ObjectHideFlags: 0
@@ -6706,6 +6644,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -6918,6 +6857,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -7114,6 +7054,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &2015042758
 GameObject:
   m_ObjectHideFlags: 0
@@ -7171,6 +7113,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -7367,6 +7310,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &2039582387
 GameObject:
   m_ObjectHideFlags: 0
@@ -7627,6 +7572,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &1646233735040318970
 GameObject:
   m_ObjectHideFlags: 0
@@ -7778,6 +7725,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &1705173953606673209
 GameObject:
   m_ObjectHideFlags: 0
@@ -7912,6 +7861,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -8243,6 +8193,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1 &2354321873443772970
 GameObject:
   m_ObjectHideFlags: 0
@@ -8300,6 +8252,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -8826,6 +8779,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -8905,7 +8859,6 @@ Transform:
   m_Children:
   - {fileID: 4085954272798497929}
   - {fileID: 1584868076}
-  - {fileID: 405512300}
   - {fileID: 1100044651}
   - {fileID: 1055428655}
   - {fileID: 645687617}
@@ -8922,7 +8875,7 @@ Transform:
   - {fileID: 13842144}
   - {fileID: 897911163}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2535554485623913639
 MeshFilter:
@@ -9002,10 +8955,13 @@ MonoBehaviour:
   PSUInstalled: 0
   HUD: {fileID: 0}
   HUDInstalled: 0
-  OutPutDevice: {fileID: 405512299}
+  Fans: []
+  FansInstalled: 0
+  OutPutDevice: {fileID: 0}
   OutPutDeviceInstalled: 0
   VirusProtection: {fileID: 0}
   VirusProtectionInstalled: 0
+  projectile: {fileID: 0}
   Inventory:
   - {fileID: 0}
   - {fileID: 0}
@@ -9027,6 +8983,7 @@ MonoBehaviour:
   RamSlots:
   - {fileID: 2039582387}
   - {fileID: 880615114}
+  FanSlots: []
   PSUSlots:
   - {fileID: 933387315}
   heldComponent: {fileID: 0}
@@ -9052,7 +9009,14 @@ MonoBehaviour:
   lookXLimit: 60
   drainwait: 100
   maxPower: 0
+  componentPowerDraw: 0
+  powerRegen: 0
   currentPower: 0
+  powerPerShot: 0
+  fireRate: 0
+  heatDispersion: 0
+  totalHeat: 0
+  maxHeat: 100
   NooFBuffs: 0
   buffs: []
   inBuildMode: 0
@@ -9127,6 +9091,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -9458,6 +9423,8 @@ MonoBehaviour:
   inventory: []
   manager: {fileID: 0}
   previousSlot: {fileID: 0}
+  expectedComponent: 
+  amICorrectType: 0
 --- !u!1001 &2915077187547876857
 PrefabInstance:
   m_ObjectHideFlags: 0

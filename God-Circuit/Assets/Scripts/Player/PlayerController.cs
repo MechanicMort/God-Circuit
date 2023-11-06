@@ -14,14 +14,21 @@ public class PlayerController : MonoBehaviour
     public GameObject lantern;
     public GameObject testGun;
     public GameObject gunSpot;
+    public GameObject ADSSpot;
     public MotherBoard motherBoard;
     public GameObject frontSpot;
     public GameObject backSpot;
+
+    public GameObject leftLean;
+    public GameObject rightLean;
+    public GameObject centrePos;
 
     public Camera playerCam;
     public Transform playerCameraParent;
     CharacterController characterController;
     [Header("PlayerStats")]
+    public float rotateMod = 0;
+
     public float NoOfBuffs = 0;
 
     public float gunDrag = 5;
@@ -47,6 +54,7 @@ public class PlayerController : MonoBehaviour
     public float shieldRecoverySpeed = 100;
     public float stamRecoverySpeed = 100;
     public float speed;
+    public float moveSpeedMod = 1;
     public float sprintSpeed = 16.5f;
     public float crouchSpeed = 6.5f;
     public float normalSpeed = 10.5f;
@@ -295,10 +303,51 @@ public class PlayerController : MonoBehaviour
         //clamp all stats after
     }
 
+    private void ADS()
+    {
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            testGun.transform.position = ADSSpot.transform.position;// Vector3.Lerp(testGun.transform.position, ADSSpot.transform.position, 0.5f);
+            testGun.transform.rotation = ADSSpot.transform.rotation; //Quaternion.Lerp(testGun.transform.rotation, ADSSpot.transform.rotation, 0.5f);
+            moveSpeedMod = 0.6f;
+        }
+        else
+        {
+            testGun.transform.position = gunSpot.transform.position; // Vector3.Lerp(testGun.transform.position, gunSpot.transform.position, 0.5f);
+            testGun.transform.rotation = gunSpot.transform.rotation;// Quaternion.Lerp(testGun.transform.rotation, gunSpot.transform.rotation, 0.5f);
+            moveSpeedMod = 1f;
+        }
+    }
+
+
+    private void Lean()
+    {
+        if (Input.GetKey(KeyCode.Q))
+        {
+            playerCameraParent.transform.position = Vector3.Lerp(playerCameraParent.transform.position, leftLean.transform.position, 0.5f);
+            playerCameraParent.transform.rotation = Quaternion.Lerp(playerCameraParent.transform.rotation, leftLean.transform.rotation, 0.5f);
+            rotateMod = Mathf.Lerp(rotateMod, 20f, 0.5f);
+        }
+        else if(Input.GetKey(KeyCode.E))
+        {
+            playerCameraParent.transform.position = Vector3.Lerp(playerCameraParent.transform.position, rightLean.transform.position, 0.5f);
+            playerCameraParent.transform.rotation = Quaternion.Lerp(playerCameraParent.transform.rotation, rightLean.transform.rotation, 0.5f);
+            rotateMod = Mathf.Lerp(rotateMod, -20f, 0.5f);
+        }
+        else
+        {
+            playerCameraParent.transform.position = Vector3.Lerp(playerCameraParent.transform.position, centrePos.transform.position, 0.5f);
+            playerCameraParent.transform.rotation = Quaternion.Lerp(playerCameraParent.transform.rotation, centrePos.transform.rotation, 0.5f);
+            rotateMod = Mathf.Lerp(rotateMod, 0, 0.5f);
+
+        }
+    }
+
     public void Movement()
     {
-        testGun.transform.position = Vector3.Lerp(testGun.transform.position, gunSpot.transform.position, gunDrag);
-        testGun.transform.rotation = Quaternion.Lerp(testGun.transform.rotation, gunSpot.transform.rotation, gunDrag);
+        ADS();
+
+        Lean();
 
         if (shieldDrainWait <= 0)
         {
@@ -390,14 +439,15 @@ public class PlayerController : MonoBehaviour
 
         moveDirection.y -= gravity * Time.deltaTime;
 
-        characterController.Move(moveDirection * Time.deltaTime);
+        characterController.Move(moveDirection * Time.deltaTime * moveSpeedMod);
 
         if (canMove)
         {
             rotation.y += Input.GetAxis("Mouse X") * lookSpeed;
             rotation.x += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotation.x = Mathf.Clamp(rotation.x, -lookXLimit, lookXLimit);
-            playerCameraParent.localRotation = Quaternion.Euler(rotation.x, 0, 0);
+
+            playerCameraParent.localRotation = Quaternion.Euler(rotation.x, 0, rotateMod);
             transform.eulerAngles = new Vector2(0, rotation.y);
         }
     }

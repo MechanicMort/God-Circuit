@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 
 public class WeatherController : MonoBehaviour
 {
+    
     public GameObject sun;
     public GameObject moon;
     public GameObject rain;
@@ -16,7 +17,7 @@ public class WeatherController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        DontDestroyOnLoad(this);
     }
     public string GetTime()
     {

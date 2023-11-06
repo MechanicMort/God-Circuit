@@ -10,7 +10,7 @@ public class HomeScreen : MonoBehaviour
     public TMP_Text time;
     public void Update()
     {
-        time = weatherController.GetTime();
+        time.text = weatherController.GetTime();
     }
     public void OpenApp(GameObject appToOpen)
     {
