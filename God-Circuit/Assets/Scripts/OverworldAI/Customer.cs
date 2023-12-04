@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Customer : BaseAI
 {
 
     public GameObject shoppingCart;
     public GameObject checkOut;
+    public GameObject convoCam;
+    public ConvoLogic convoLogic;
+    public ConvoSO myConvo;
     private float Kindness;
     private string Name;
     private string Description;
@@ -21,6 +25,7 @@ public class Customer : BaseAI
 
     void Start()
     {
+        convoLogic = GameObject.FindGameObjectWithTag("ConvoDisplay").GetComponent<ConvoLogic>();
         items[0] = "SodyPop";
         itemsWanted[0] = "SodyPop";
         checkOut = GameObject.FindGameObjectWithTag("CheckOut");
@@ -35,6 +40,14 @@ public class Customer : BaseAI
         
     }
 
+    public void StartConvo()
+    {
+        convoLogic.StartConvo(myConvo,convoCam);
+    }
+    private void GiveMoney(float moneyNeeded)
+    {
+
+    }
 
     private void CreatePath()
     {

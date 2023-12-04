@@ -17,6 +17,7 @@ public class BaseOverWorldController : MonoBehaviour
     
     [Header("GameObjects")]
     public GameObject lantern;
+    public GameObject debugHolder;
     public GameObject phone;
     public GameObject phoneUpSpot;
     public GameObject phoneDownSpot;
@@ -41,7 +42,7 @@ public class BaseOverWorldController : MonoBehaviour
     public bool phoneIsDown = false;
     public bool faster = false;
     public bool canTurn = false;
-
+    public bool atWork = true;
 
 
     void Start()
@@ -65,12 +66,13 @@ public class BaseOverWorldController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
             {
-
-            //    debugHolder.transform.position = hit.point;
+                print(hit.collider.name);
+                debugHolder.transform.position = hit.point;
                 if (hit.collider.GetComponent<InvokeInteraction>())
                 {
                     hit.collider.GetComponent<InvokeInteraction>().InvokeTheInteraction();
                     print("Starting Invoke Chain");
+
                 }
             }
 

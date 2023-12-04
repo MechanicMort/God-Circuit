@@ -31,11 +31,12 @@ public class ConvoLogic : MonoBehaviour
         {
 
             inConvo = !inConvo;
-            StartConvo(convoSO);
+            StartConvo(convoSO, newcCamSpot);
         }
     }
-    private void StartConvo(ConvoSO convoSO)
+    public void StartConvo(ConvoSO convoSO,GameObject newCamSpot)
     {
+        camSpot = newCamSpot;
         player.playerCameraParent.transform.position = camSpot.transform.position;
         player.playerCameraParent.transform.rotation = camSpot.transform.rotation;
         Cursor.lockState = CursorLockMode.Confined;

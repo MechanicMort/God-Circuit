@@ -83,6 +83,7 @@ public class MotherBoard : MonoBehaviour
     void Start()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        OutPutDevice = GameObject.FindGameObjectWithTag("CurrentWeapon");
         PartSwap();
         StartCoroutine(Tickers());
     }
@@ -261,6 +262,7 @@ public class MotherBoard : MonoBehaviour
             if (currentPower > powerPerShot)
             {
                 print("Should Fire");
+                print(projectile.name);
                 if (OutPutDevice.GetComponent<BasicRangedWeapon>().FireWeapon(projectile))
                 {
                     DrainPower(powerPerShot);

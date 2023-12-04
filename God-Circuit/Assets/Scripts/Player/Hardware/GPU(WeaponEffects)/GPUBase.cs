@@ -9,7 +9,9 @@ public class GPUBase : UIComponentSwap
     public float heatGeneration;
     public float fireRate;
     public GameObject projectile;
+    public GameObject ejectedCase;
     public GameObject motherBoard;
+    public GameObject myWeapon;
 
     [Header("Component")]
     public string componentName;
@@ -38,6 +40,10 @@ public class GPUBase : UIComponentSwap
     public void GPUSetUP()
     {
         motherBoard = transform.parent.gameObject;
+        myWeapon = GameObject.FindGameObjectWithTag("CurrentWeapon");
+        projectile = myWeapon.GetComponent<WeaponAnims>().weaponsBullet;
+        ejectedCase = myWeapon.GetComponent<WeaponAnims>().weaponsCase;
+
     }
 
     // Update is called once per frame
