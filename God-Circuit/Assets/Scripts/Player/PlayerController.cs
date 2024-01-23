@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public GameObject testGun;
     public GameObject gunSpot;
     public GameObject ADSSpot;
+    public GameObject ADSSpotCrouched;
     public MotherBoard motherBoard;
     public GameObject frontSpot;
     public GameObject backSpot;
@@ -22,6 +23,10 @@ public class PlayerController : MonoBehaviour
     public GameObject leftLean;
     public GameObject rightLean;
     public GameObject centrePos;
+    
+    public GameObject leftLeanCrouched;
+    public GameObject rightLeanCrouched;
+    public GameObject centrePosCrouched;
 
     public Camera playerCam;
     public Transform playerCameraParent;
@@ -118,8 +123,9 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         StartCoroutine(drainTimer());
         StartCoroutine(DashCoolDown());
-
         motherBoard.PartSwap();
+
+
 
     }
 
@@ -227,11 +233,10 @@ public class PlayerController : MonoBehaviour
         if (!inBoardMode)
         {
             Movement();
-            Combat();
 
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B) && !isCrouched)
         {
             if (frontBack)
             {
@@ -260,14 +265,13 @@ public class PlayerController : MonoBehaviour
 
 
 
-    private void Combat()
-    {
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            print("Fire Weapon");
-            motherBoard.FireWeapon();
-        }
-    }
+    //private void combat()
+    //{
+    //    if (input.getkey(keycode.mouse0))
+    //    {
+    //        motherboard.fireweapon();
+    //    }
+    //}
 
     private void AirDash()
     {
@@ -305,7 +309,14 @@ public class PlayerController : MonoBehaviour
 
     private void ADS()
     {
-        if (Input.GetKey(KeyCode.Mouse1))
+
+        if (Input.GetKey(KeyCode.Mouse1) && isCrouched)
+        {
+            testGun.transform.position = ADSSpotCrouched.transform.position;// Vector3.Lerp(testGun.transform.position, ADSSpot.transform.position, 0.5f);
+            testGun.transform.rotation = ADSSpotCrouched.transform.rotation; //Quaternion.Lerp(testGun.transform.rotation, ADSSpot.transform.rotation, 0.5f);
+            moveSpeedMod = 0.6f;
+        }  
+        else if (Input.GetKey(KeyCode.Mouse1))
         {
             testGun.transform.position = ADSSpot.transform.position;// Vector3.Lerp(testGun.transform.position, ADSSpot.transform.position, 0.5f);
             testGun.transform.rotation = ADSSpot.transform.rotation; //Quaternion.Lerp(testGun.transform.rotation, ADSSpot.transform.rotation, 0.5f);
@@ -322,25 +333,52 @@ public class PlayerController : MonoBehaviour
 
     private void Lean()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (!isCrouched)
         {
-            playerCameraParent.transform.position = Vector3.Lerp(playerCameraParent.transform.position, leftLean.transform.position, 0.5f);
-            playerCameraParent.transform.rotation = Quaternion.Lerp(playerCameraParent.transform.rotation, leftLean.transform.rotation, 0.5f);
-            rotateMod = Mathf.Lerp(rotateMod, 20f, 0.5f);
-        }
-        else if(Input.GetKey(KeyCode.E))
-        {
-            playerCameraParent.transform.position = Vector3.Lerp(playerCameraParent.transform.position, rightLean.transform.position, 0.5f);
-            playerCameraParent.transform.rotation = Quaternion.Lerp(playerCameraParent.transform.rotation, rightLean.transform.rotation, 0.5f);
-            rotateMod = Mathf.Lerp(rotateMod, -20f, 0.5f);
+            if (Input.GetKey(KeyCode.Q))
+            {
+                playerCameraParent.transform.position = Vector3.Lerp(playerCameraParent.transform.position, leftLean.transform.position, 0.5f);
+                playerCameraParent.transform.rotation = Quaternion.Lerp(playerCameraParent.transform.rotation, leftLean.transform.rotation, 0.5f);
+                rotateMod = Mathf.Lerp(rotateMod, 20f, 0.5f);
+            }
+            else if (Input.GetKey(KeyCode.E))
+            {
+                playerCameraParent.transform.position = Vector3.Lerp(playerCameraParent.transform.position, rightLean.transform.position, 0.5f);
+                playerCameraParent.transform.rotation = Quaternion.Lerp(playerCameraParent.transform.rotation, rightLean.transform.rotation, 0.5f);
+                rotateMod = Mathf.Lerp(rotateMod, -20f, 0.5f);
+            }
+            else
+            {
+                playerCameraParent.transform.position = Vector3.Lerp(playerCameraParent.transform.position, centrePos.transform.position, 0.5f);
+                playerCameraParent.transform.rotation = Quaternion.Lerp(playerCameraParent.transform.rotation, centrePos.transform.rotation, 0.5f);
+                rotateMod = Mathf.Lerp(rotateMod, 0, 0.5f);
+
+            }
         }
         else
         {
-            playerCameraParent.transform.position = Vector3.Lerp(playerCameraParent.transform.position, centrePos.transform.position, 0.5f);
-            playerCameraParent.transform.rotation = Quaternion.Lerp(playerCameraParent.transform.rotation, centrePos.transform.rotation, 0.5f);
-            rotateMod = Mathf.Lerp(rotateMod, 0, 0.5f);
+            if (Input.GetKey(KeyCode.Q))
+            {
+                playerCameraParent.transform.position = Vector3.Lerp(playerCameraParent.transform.position, leftLeanCrouched.transform.position, 0.5f);
+                playerCameraParent.transform.rotation = Quaternion.Lerp(playerCameraParent.transform.rotation, leftLeanCrouched.transform.rotation, 0.5f);
+                rotateMod = Mathf.Lerp(rotateMod, 20f, 0.5f);
+            }
+            else if (Input.GetKey(KeyCode.E))
+            {
+                playerCameraParent.transform.position = Vector3.Lerp(playerCameraParent.transform.position, rightLeanCrouched.transform.position, 0.5f);
+                playerCameraParent.transform.rotation = Quaternion.Lerp(playerCameraParent.transform.rotation, rightLeanCrouched.transform.rotation, 0.5f);
+                rotateMod = Mathf.Lerp(rotateMod, -20f, 0.5f);
+            }
+            else
+            {
+                playerCameraParent.transform.position = Vector3.Lerp(playerCameraParent.transform.position, centrePosCrouched.transform.position, 0.5f);
+                playerCameraParent.transform.rotation = Quaternion.Lerp(playerCameraParent.transform.rotation, centrePosCrouched.transform.rotation, 0.5f);
+                rotateMod = Mathf.Lerp(rotateMod, 0, 0.5f);
 
+            }
         }
+
+     
     }
 
     public void Movement()
@@ -394,6 +432,15 @@ public class PlayerController : MonoBehaviour
                 drainwait = 100;
                 Dash();
             }
+
+            //
+
+            //if ((Input.GetKey(KeyCode.C)))
+            //{
+            //    //make crouch bool true
+            //    //ToDo: make toggle coruch
+            //}
+
             else if (Input.GetKey(KeyCode.C))
             {
 
@@ -407,6 +454,8 @@ public class PlayerController : MonoBehaviour
                 isCrouched = false;
                 speed = normalSpeed;
             }
+
+
             if (isDashing)
             {
                 speed *= dashLength;

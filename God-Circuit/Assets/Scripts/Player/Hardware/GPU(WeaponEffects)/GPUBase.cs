@@ -8,8 +8,6 @@ public class GPUBase : UIComponentSwap
     public float powerDrawPerShot;
     public float heatGeneration;
     public float fireRate;
-    public GameObject projectile;
-    public GameObject ejectedCase;
     public GameObject motherBoard;
     public GameObject myWeapon;
 
@@ -41,8 +39,6 @@ public class GPUBase : UIComponentSwap
     {
         motherBoard = transform.parent.gameObject;
         myWeapon = GameObject.FindGameObjectWithTag("CurrentWeapon");
-        projectile = myWeapon.GetComponent<WeaponAnims>().weaponsBullet;
-        ejectedCase = myWeapon.GetComponent<WeaponAnims>().weaponsCase;
 
     }
 

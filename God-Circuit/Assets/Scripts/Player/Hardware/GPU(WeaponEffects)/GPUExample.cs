@@ -13,7 +13,7 @@ public class GPUExample : GPUBase
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !GameObject.FindGameObjectWithTag("MotherBoard").GetComponent<MotherBoard>().inBuildMode)
+        if (Input.GetKey(KeyCode.Mouse0) && !GameObject.FindGameObjectWithTag("MotherBoard").GetComponent<MotherBoard>().inBuildMode)
         {
           motherBoard.GetComponent<MotherBoard>().FireWeapon();
         }

@@ -20,10 +20,23 @@ public class Projectile : MonoBehaviour
             collision.gameObject.GetComponent<IEnemyModule>().TakeDamage(damage);
             Destroy(this.gameObject);
         }
+        print("Collision with" + collision.transform.name);
         //LIKE DO STUFF AND LIKE EFFECTS KABOOOM
         Destroy(this.gameObject);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        
+            if (other.transform.tag == "Enemy")
+            {
+            other.gameObject.GetComponent<IEnemyModule>().TakeDamage(damage);
+                Destroy(this.gameObject);
+            }
+            print("Collision with" + other.transform.name);
+            //LIKE DO STUFF AND LIKE EFFECTS KABOOOM
+            Destroy(this.gameObject);
+        }
 
     public void FixedUpdate()
     {
@@ -31,5 +44,7 @@ public class Projectile : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
 
         rb.AddForce(transform.forward * speed);
+
+        rb.AddForce(Physics.gravity);
     }
 }

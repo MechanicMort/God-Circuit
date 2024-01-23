@@ -26,7 +26,6 @@ public class MotherBoard : MonoBehaviour
     public int OutPutDeviceInstalled;
     public GameObject VirusProtection;
     public int VirusProtectionInstalled;
-    public GameObject projectile;
 
     [Header("BoardManagement")]
     public GameObject[] Inventory = new GameObject[6];
@@ -113,6 +112,7 @@ public class MotherBoard : MonoBehaviour
             if (GPUSlots[i].GetComponentInChildren<UIComponentSwap>().component != null)
             {
                 GPU[GPUsInstalled] = GPUSlots[i].GetComponentInChildren<UIComponentSwap>().component;
+                GPU[i].transform.position = GPUSlots[i].transform.position;
                 GPUsInstalled += 1;
             }
         }
@@ -121,6 +121,7 @@ public class MotherBoard : MonoBehaviour
             if (FanSlots[i].GetComponentInChildren<UIComponentSwap>().component != null)
             {
                 Fans[FansInstalled] = FanSlots[i].GetComponentInChildren<UIComponentSwap>().component;
+                Fans[i].transform.position = FanSlots[i].transform.position;
                 FansInstalled += 1;
             }
         }
@@ -129,6 +130,7 @@ public class MotherBoard : MonoBehaviour
             if (RamSlots[i].GetComponentInChildren<UIComponentSwap>().component != null)
             {
                 Ram[RamInstalled] = RamSlots[i].GetComponentInChildren<UIComponentSwap>().component;
+                Ram[i].transform.position = RamSlots[i].transform.position;
                 RamInstalled += 1;
             }
         }
@@ -137,6 +139,7 @@ public class MotherBoard : MonoBehaviour
             if (CPUSlots[i].GetComponentInChildren<UIComponentSwap>().component != null)
             {
                 CPU[CPUsInstalled] = CPUSlots[i].GetComponentInChildren<UIComponentSwap>().component;
+                CPU[i].transform.position = CPUSlots[i].transform.position;
                 CPUsInstalled += 1;
             }
         }
@@ -145,6 +148,7 @@ public class MotherBoard : MonoBehaviour
             if (PSUSlots[i].GetComponentInChildren<UIComponentSwap>().component != null)
             {
                 PSU[PSUInstalled] = PSUSlots[i].GetComponentInChildren<UIComponentSwap>().component;
+                PSU[i].transform.position = PSUSlots[i].transform.position;
                 PSUInstalled += 1;
             }
         }
@@ -171,7 +175,6 @@ public class MotherBoard : MonoBehaviour
             {
                 if (i==0)
                 {
-                    projectile = GPU[0].GetComponent<GPUBase>().projectile;
                     fireRate = GPU[0].GetComponent<GPUBase>().fireRate;
                     powerPerShot = GPU[0].GetComponent<GPUBase>().powerDrawPerShot;
                 }
@@ -261,9 +264,9 @@ public class MotherBoard : MonoBehaviour
 
             if (currentPower > powerPerShot)
             {
-                print("Should Fire");
-                print(projectile.name);
-                if (OutPutDevice.GetComponent<BasicRangedWeapon>().FireWeapon(projectile))
+               // print("Should Fire");
+               // print(projectile.name);
+                if (OutPutDevice.GetComponent<BasicRangedWeapon>().FireWeapon())
                 {
                     DrainPower(powerPerShot);
                 } 
