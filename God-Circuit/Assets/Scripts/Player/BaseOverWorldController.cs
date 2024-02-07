@@ -55,34 +55,10 @@ public class BaseOverWorldController : MonoBehaviour
 
 
 
-    public void InvokeThings()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-
-            print("Casting");
-    
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100))
-            {
-                print(hit.collider.name);
-                debugHolder.transform.position = hit.point;
-                if (hit.collider.GetComponent<InvokeInteraction>())
-                {
-                    hit.collider.GetComponent<InvokeInteraction>().InvokeTheInteraction();
-                    print("Starting Invoke Chain");
-
-                }
-            }
-
-        }
-    }
 
     private void Update()
     {
         Movement();
-        InvokeThings();
         if (Input.GetKeyDown(KeyCode.T) && hasTorch)
         {
             lantern.SetActive(!lantern.activeInHierarchy);

@@ -12,7 +12,8 @@ public class ItemCanvasManager : MonoBehaviour
     public TMP_Text itemCostText;
     public Image Image;
     public GameObject panel;
-   
+    public bool inInv;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,7 @@ public class ItemCanvasManager : MonoBehaviour
     void Update()
     {
         transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform.position);
-        if (Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position,transform.position) > 4)
+        if (Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, transform.position) > 4 || inInv)
         {
             panel.SetActive(false);
         }

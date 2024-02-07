@@ -42,9 +42,4 @@ public class GPUBase : UIComponentSwap
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

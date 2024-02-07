@@ -12,7 +12,15 @@ public class PlayerController : MonoBehaviour
 {
     [Header("GameObjects")]
     public GameObject lantern;
-    public GameObject testGun;
+
+
+    public GameObject gunHolder;
+
+    public GameObject[] myWeapons = new GameObject[3];
+    public GameObject gunHolster;
+    public bool hasWeaponOut = false;
+
+
     public GameObject gunSpot;
     public GameObject ADSSpot;
     public GameObject ADSSpotCrouched;
@@ -128,7 +136,7 @@ public class PlayerController : MonoBehaviour
 
 
     }
-
+ 
     public void TakeDamage(float damage)
     {
         if (damage > 0)
@@ -264,14 +272,83 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    public bool WeaponEquip(GameObject weapon)
+    {
+        for (int i = 0;i < myWeapons.Length-1;i++)
+        {
+            if (myWeapons[i] == null)
+            {
+                myWeapons[i] = weapon;
+                return true;
+            }
+        }
+        return false;
+    }
 
-    //private void combat()
-    //{
-    //    if (input.getkey(keycode.mouse0))
-    //    {
-    //        motherboard.fireweapon();
-    //    }
-    //}
+    private void ResetCurrentWeapon()
+    {
+        if (GameObject.FindGameObjectWithTag("CurrentWeapon"))
+        {
+            GameObject.FindGameObjectWithTag("CurrentWeapon").transform.parent = gunHolster.transform;
+            GameObject.FindGameObjectWithTag("CurrentWeapon").GetComponent<Animator>().enabled = false;
+            GameObject.FindGameObjectWithTag("CurrentWeapon").transform.tag = "Weapon";
+        }
+    }
+
+    private IEnumerator AnimatorDelay(Animator aim)
+    {
+        aim.gameObject.transform.localPosition = Vector3.zero;
+        aim.gameObject.transform.localRotation = Quaternion.identity;
+        yield return new WaitForSeconds(0.01f);
+        aim.enabled = true;
+        motherBoard.WeaponSwap(aim.gameObject);
+    }
+
+    private void Combat()
+    {
+
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) && myWeapons[0] != null)
+        {
+            
+            ResetCurrentWeapon();
+            myWeapons[0].transform.parent = gunHolder.transform;
+            myWeapons[0].transform.position =  Vector3.zero;
+            myWeapons[0].transform.rotation = Quaternion.identity;
+            myWeapons[0].transform.tag = "CurrentWeapon";
+            hasWeaponOut = true;
+            StartCoroutine(AnimatorDelay(myWeapons[0].GetComponent<Animator>()));
+
+
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) && myWeapons[1] != null)
+        {
+            ResetCurrentWeapon();
+            myWeapons[1].transform.parent = gunHolder.transform;
+            myWeapons[1].transform.position = Vector3.zero;
+            myWeapons[1].transform.rotation = Quaternion.identity;
+            myWeapons[1].GetComponent<Animator>().enabled = true;
+            myWeapons[1].transform.tag = "CurrentWeapon";
+            hasWeaponOut = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3) && myWeapons[2] != null)
+        {
+            ResetCurrentWeapon();
+            myWeapons[2].transform.parent = gunHolder.transform;
+            myWeapons[2].transform.position = Vector3.zero;
+            myWeapons[2].transform.rotation = Quaternion.identity;
+            myWeapons[2].GetComponent<Animator>().enabled = true;
+            myWeapons[2].transform.tag = "CurrentWeapon";
+            hasWeaponOut = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            ResetCurrentWeapon();
+            hasWeaponOut = false;
+        }
+    }
 
     private void AirDash()
     {
@@ -312,20 +389,20 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Mouse1) && isCrouched)
         {
-            testGun.transform.position = ADSSpotCrouched.transform.position;// Vector3.Lerp(testGun.transform.position, ADSSpot.transform.position, 0.5f);
-            testGun.transform.rotation = ADSSpotCrouched.transform.rotation; //Quaternion.Lerp(testGun.transform.rotation, ADSSpot.transform.rotation, 0.5f);
+            gunHolder.transform.position = ADSSpotCrouched.transform.position;// Vector3.Lerp(testGun.transform.position, ADSSpot.transform.position, 0.5f);
+            gunHolder.transform.rotation = ADSSpotCrouched.transform.rotation; //Quaternion.Lerp(testGun.transform.rotation, ADSSpot.transform.rotation, 0.5f);
             moveSpeedMod = 0.6f;
         }  
         else if (Input.GetKey(KeyCode.Mouse1))
         {
-            testGun.transform.position = ADSSpot.transform.position;// Vector3.Lerp(testGun.transform.position, ADSSpot.transform.position, 0.5f);
-            testGun.transform.rotation = ADSSpot.transform.rotation; //Quaternion.Lerp(testGun.transform.rotation, ADSSpot.transform.rotation, 0.5f);
+            gunHolder.transform.position = ADSSpot.transform.position;// Vector3.Lerp(testGun.transform.position, ADSSpot.transform.position, 0.5f);
+            gunHolder.transform.rotation = ADSSpot.transform.rotation; //Quaternion.Lerp(testGun.transform.rotation, ADSSpot.transform.rotation, 0.5f);
             moveSpeedMod = 0.6f;
         }
         else
         {
-            testGun.transform.position = gunSpot.transform.position; // Vector3.Lerp(testGun.transform.position, gunSpot.transform.position, 0.5f);
-            testGun.transform.rotation = gunSpot.transform.rotation;// Quaternion.Lerp(testGun.transform.rotation, gunSpot.transform.rotation, 0.5f);
+            gunHolder.transform.position = gunSpot.transform.position; // Vector3.Lerp(testGun.transform.position, gunSpot.transform.position, 0.5f);
+            gunHolder.transform.rotation = gunSpot.transform.rotation;// Quaternion.Lerp(testGun.transform.rotation, gunSpot.transform.rotation, 0.5f);
             moveSpeedMod = 1f;
         }
     }
@@ -383,9 +460,10 @@ public class PlayerController : MonoBehaviour
 
     public void Movement()
     {
-        ADS();
-
+   
+        Combat();
         Lean();
+        ADS();
 
         if (shieldDrainWait <= 0)
         {

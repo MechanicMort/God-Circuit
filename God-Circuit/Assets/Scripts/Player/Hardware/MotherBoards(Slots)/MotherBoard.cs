@@ -87,6 +87,15 @@ public class MotherBoard : MonoBehaviour
         StartCoroutine(Tickers());
     }
 
+    public void WeaponSwap(GameObject newWeapon)
+    {
+        OutPutDevice = newWeapon; 
+        for (int i = 0; i < GPU.Length; i++)
+        {
+            GPU[i].GetComponent<GPUBase>().GPUSetUP();
+        }
+    }
+
     public void PartSwap()
     {
       NooFBuffs = 0;
@@ -264,12 +273,16 @@ public class MotherBoard : MonoBehaviour
 
             if (currentPower > powerPerShot)
             {
-               // print("Should Fire");
-               // print(projectile.name);
-                if (OutPutDevice.GetComponent<BasicRangedWeapon>().FireWeapon())
+                // print("Should Fire");
+                // print(projectile.name);
+                if (playerController.hasWeaponOut)
                 {
-                    DrainPower(powerPerShot);
-                } 
+                    if (OutPutDevice.GetComponent<BasicRangedWeapon>().FireWeapon())
+                    {
+                        DrainPower(powerPerShot);
+                    }
+                }
+              
                
             }
 

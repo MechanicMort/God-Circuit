@@ -5,12 +5,17 @@ using UnityEngine;
 public class ItemHolder : MonoBehaviour
 {
     public OverWorldItem item;
+    public bool isWeapon;
 
     public bool inBasket;
     public void PickupItem()
     {
         print("Should Add Item");
-        GameObject.FindGameObjectWithTag("Phone").GetComponent<Inventory>().AddItem(this.gameObject,item.itemImage);
+        if (!isWeapon)
+        {
+            GameObject.FindGameObjectWithTag("Phone").GetComponent<Inventory>().AddItem(this.gameObject, item.itemImage);
+        }
+       
     }
 
   public void ScanItem()
