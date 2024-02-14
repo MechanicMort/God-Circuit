@@ -26,6 +26,7 @@ public class Phone : MonoBehaviour
     }
     public void PickUpPhone()
     {
+        print("phonePickedUp");
         GameObject.FindGameObjectWithTag("Player").GetComponent<BaseOverWorldController>().phone = this.gameObject;
         GameObject.FindGameObjectWithTag("Player").GetComponent<BaseOverWorldController>().hasPhone = true;
         this.transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform);

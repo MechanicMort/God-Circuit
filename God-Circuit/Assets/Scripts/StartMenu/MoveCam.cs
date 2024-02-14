@@ -17,7 +17,6 @@ public class MoveCam : MonoBehaviour
     private IEnumerator MoveTheCamTimer()
     {
         transform.position = Vector3.Lerp(transform.position, target.position, distanceNeededEachMove);
-        print(Vector3.Distance(transform.position, target.position));
         yield return new WaitForSeconds(0.01f);
         if (Vector3.Distance(transform.position,target.position) < 0.1f)
         {

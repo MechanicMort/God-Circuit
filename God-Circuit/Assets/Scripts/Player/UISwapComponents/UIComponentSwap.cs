@@ -20,6 +20,7 @@ public class UIComponentSwap : MonoBehaviour
 
 
         }
+
     public PassValues passValues = new PassValues();
 
     public void SelectComponent()
