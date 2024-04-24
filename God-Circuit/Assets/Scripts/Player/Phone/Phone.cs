@@ -7,6 +7,7 @@ public class Phone : MonoBehaviour
 {
 
     public GameObject phoneScreen;
+    public ItemCanvasManager itemCanvasManager;
     public bool power;
 
     public MeshRenderer centreMeshRender;
@@ -30,6 +31,13 @@ public class Phone : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").GetComponent<BaseOverWorldController>().phone = this.gameObject;
         GameObject.FindGameObjectWithTag("Player").GetComponent<BaseOverWorldController>().hasPhone = true;
         this.transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform);
+        itemCanvasManager.inInv = true;
+    }
+
+    public void OnDrawGizmos()
+    {
+        itemCanvasManager.inInv = false;
+        //instant in world
     }
 
     // Update is called once per frame

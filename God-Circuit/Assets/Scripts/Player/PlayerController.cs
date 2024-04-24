@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Mathematics;
 
 
 
@@ -10,9 +11,12 @@ using TMPro;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    private Event e;
+
     [Header("GameObjects")]
     public GameObject lantern;
 
+    private BaseOverWorldController controller;
 
     public GameObject gunHolder;
 
@@ -81,6 +85,7 @@ public class PlayerController : MonoBehaviour
     public float shieldDrainWait = 100;
 
     [Header("UITHINGIES")]
+    public GameObject UIPanel;
     public Image stamDisplay;
 
     public Image healthDisplay;
@@ -122,6 +127,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        controller = GetComponent<BaseOverWorldController>();
         motherBoard = GameObject.FindGameObjectWithTag("MotherBoard").GetComponent<MotherBoard>();
         Stamina = StaminaMax;
         hP = hpMax;
@@ -136,7 +142,19 @@ public class PlayerController : MonoBehaviour
 
 
     }
- 
+
+    public void OnEnable()
+    {
+        ToggleUI(true);
+    }
+
+    public void ToggleUI(bool onOrOff)
+    {
+        UIPanel.SetActive(onOrOff);
+    }
+
+
+
     public void TakeDamage(float damage)
     {
         if (damage > 0)
@@ -234,12 +252,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void SwapControllMode()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            ToggleUI(false);
+            WeaponSwapping(KeyCode.Alpha4);
+            controller.enabled = true;
+            this.GetComponent<PlayerController>().enabled = false;
+        }
+    }
+
     private void Update()
     {
+
+        SwapControllMode();
         InvokeThings();
         UpdateUI();
         if (!inBoardMode)
         {
+            Combat();
             Movement();
 
         }
@@ -289,9 +321,13 @@ public class PlayerController : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("CurrentWeapon"))
         {
-            GameObject.FindGameObjectWithTag("CurrentWeapon").transform.parent = gunHolster.transform;
-            GameObject.FindGameObjectWithTag("CurrentWeapon").GetComponent<Animator>().enabled = false;
-            GameObject.FindGameObjectWithTag("CurrentWeapon").transform.tag = "Weapon";
+            GameObject weaponManip = GameObject.FindGameObjectWithTag("CurrentWeapon");
+            weaponManip.transform.parent = gunHolster.transform;
+            weaponManip.GetComponent<Animator>().enabled = false;
+            weaponManip.transform.tag = "Weapon";
+            weaponManip.transform.position = Vector3.zero;
+            weaponManip.transform.rotation = quaternion.identity;
+
         }
     }
 
@@ -304,16 +340,14 @@ public class PlayerController : MonoBehaviour
         motherBoard.WeaponSwap(aim.gameObject);
     }
 
-    private void Combat()
+    private void WeaponSwapping(KeyCode input)
     {
-
-
-        if (Input.GetKeyDown(KeyCode.Alpha1) && myWeapons[0] != null)
+        if (input == (KeyCode.Alpha1) && myWeapons[0] != null)
         {
-            
+            print("WeaponsSwap");
             ResetCurrentWeapon();
             myWeapons[0].transform.parent = gunHolder.transform;
-            myWeapons[0].transform.position =  Vector3.zero;
+            myWeapons[0].transform.position = Vector3.zero;
             myWeapons[0].transform.rotation = Quaternion.identity;
             myWeapons[0].transform.tag = "CurrentWeapon";
             hasWeaponOut = true;
@@ -322,7 +356,7 @@ public class PlayerController : MonoBehaviour
 
 
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && myWeapons[1] != null)
+        else if (input == KeyCode.Alpha2 && myWeapons[1] != null)
         {
             ResetCurrentWeapon();
             myWeapons[1].transform.parent = gunHolder.transform;
@@ -332,8 +366,7 @@ public class PlayerController : MonoBehaviour
             myWeapons[1].transform.tag = "CurrentWeapon";
             hasWeaponOut = true;
         }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3) && myWeapons[2] != null)
+        else if (input == KeyCode.Alpha3 && myWeapons[2] != null)
         {
             ResetCurrentWeapon();
             myWeapons[2].transform.parent = gunHolder.transform;
@@ -343,11 +376,35 @@ public class PlayerController : MonoBehaviour
             myWeapons[2].transform.tag = "CurrentWeapon";
             hasWeaponOut = true;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+
+        else if (input == KeyCode.Alpha4)
         {
+
+            print("Holstering");
             ResetCurrentWeapon();
             hasWeaponOut = false;
         }
+
+    }
+
+    private void OnGUI()
+    {
+
+        e = Event.current;
+
+    }
+
+    private void Combat()
+    {
+        Lean();
+        ADS();
+
+        if (e != null)
+        {
+   
+        WeaponSwapping(e.keyCode);
+        }
+
     }
 
     private void AirDash()
@@ -461,9 +518,8 @@ public class PlayerController : MonoBehaviour
     public void Movement()
     {
    
-        Combat();
-        Lean();
-        ADS();
+
+   
 
         if (shieldDrainWait <= 0)
         {

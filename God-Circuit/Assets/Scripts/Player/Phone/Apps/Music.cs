@@ -29,6 +29,7 @@ public class Music : MonoBehaviour
         {
             AudioSource = phone.GetComponent<AudioSource>();
         }
+        LoadSongs();
     }
 
 

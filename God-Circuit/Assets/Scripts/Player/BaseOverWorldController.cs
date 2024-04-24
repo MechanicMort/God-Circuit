@@ -16,6 +16,7 @@ public class BaseOverWorldController : MonoBehaviour
     public Vector3 phoneRat;
     
     [Header("GameObjects")]
+    private PlayerController playerController;
     public GameObject lantern;
     public GameObject debugHolder;
     public GameObject phone;
@@ -47,17 +48,26 @@ public class BaseOverWorldController : MonoBehaviour
 
     void Start()
     {
+        playerController = GetComponent<PlayerController>();
         DontDestroyOnLoad(this);
         characterController = GetComponent<CharacterController>();
         rotation.y = transform.eulerAngles.y;     
     }
 
 
-
+    private void SwapControllMode()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            playerController.enabled = true;
+            this.GetComponent<BaseOverWorldController>().enabled = false;
+        }
+    }
 
 
     private void Update()
     {
+        SwapControllMode();
         Movement();
         if (Input.GetKeyDown(KeyCode.T) && hasTorch)
         {

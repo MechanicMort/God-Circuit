@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 12.527729, g: 4.8444657, b: 2.0710828, a: 1}
+  m_IndirectSpecularColor: {r: 12.526987, g: 4.8444076, b: 2.071079, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -24922,27 +24922,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1002714010668473621, guid: 73f303fab2852614e865a661f79c4803,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2390180681225288587, guid: 73f303fab2852614e865a661f79c4803,
         type: 3}
       propertyPath: weatherController
       value: 
       objectReference: {fileID: 2127551899}
-    - target: {fileID: 4138217197586722592, guid: 73f303fab2852614e865a661f79c4803,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: cda0e7c8c1b32584ebbb5c247af228a0,
-        type: 3}
-    - target: {fileID: 4896138030596300645, guid: 73f303fab2852614e865a661f79c4803,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4896138032194941351, guid: 73f303fab2852614e865a661f79c4803,
         type: 3}
       propertyPath: m_Name
@@ -25001,32 +24985,6 @@ PrefabInstance:
     - target: {fileID: 4896138032194941368, guid: 73f303fab2852614e865a661f79c4803,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4896138032332068340, guid: 73f303fab2852614e865a661f79c4803,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9077345707962029265, guid: 73f303fab2852614e865a661f79c4803,
-        type: 3}
-      propertyPath: m_Type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9077345707962029265, guid: 73f303fab2852614e865a661f79c4803,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 7482667652216324306, guid: 557cd7938656b9f48a4a5f30cefd6295,
-        type: 3}
-    - target: {fileID: 9077345707962029265, guid: 73f303fab2852614e865a661f79c4803,
-        type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9077345707962029265, guid: 73f303fab2852614e865a661f79c4803,
-        type: 3}
-      propertyPath: m_FillMethod
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

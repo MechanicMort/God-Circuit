@@ -25,13 +25,19 @@ public class Customer : BaseAI
 
     void Start()
     {
-        convoLogic = GameObject.FindGameObjectWithTag("ConvoDisplay").GetComponent<ConvoLogic>();
+       // StartCoroutine(WaitForStart());
+        convoLogic = GameObject.FindGameObjectWithTag("ConvoPanel").GetComponent<ConvoLogic>();
         items[0] = "SodyPop";
         itemsWanted[0] = "SodyPop";
         checkOut = GameObject.FindGameObjectWithTag("CheckOut");
         StartOperations();
 
         
+    }
+
+    private IEnumerator WaitForStart()
+    {
+        yield return new WaitForSeconds(2f);
     }
 
     // Update is called once per frame
