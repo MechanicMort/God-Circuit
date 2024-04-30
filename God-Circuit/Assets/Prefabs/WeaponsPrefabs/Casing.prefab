@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2458792586359339365}
   - component: {fileID: 8125777918952824229}
   m_Layer: 0
-  m_Name: Cassing
+  m_Name: Casing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 46
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2458792586359339365
 MeshFilter:

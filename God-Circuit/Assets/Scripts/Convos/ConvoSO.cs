@@ -7,8 +7,9 @@ using UnityEngine;
 public class ConvoSO : ScriptableObject
 {
     public bool isShopKeeper;
-    public string introSentance;
+    public string mySentance;
 
-    public List<string> sentances = new List<string>();
+    public List<ConvoSO> sentances = new List<ConvoSO>();
+
     
 }

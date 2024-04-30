@@ -10,15 +10,23 @@ public class ConvoLogic : MonoBehaviour
    public GameObject convoPanel;
    public GameObject camSpot;
    public BaseOverWorldController player;
-    StringBuilder displayText = new StringBuilder();
-    string wantedText;
-    int iterator =0;
-    public TMP_Text convoText;
-    public TMP_Text choiceOne;
-    public TMP_Text choiceTwo;
-    public TMP_Text choiceThree;
-    private bool inConvo = false;
+   int iterator =0;
 
+    [Header("UIObjects")]
+
+    public GameObject choiceOne;
+    public GameObject choiceTwo;
+    public GameObject choiceThree;
+    public TMP_Text convoText;
+    StringBuilder displayText = new StringBuilder();
+    StringBuilder choiceOneDisplayText = new StringBuilder();
+    StringBuilder choiceTwoDisplayText = new StringBuilder();
+    StringBuilder choiceThreeDisplayText = new StringBuilder();
+
+
+    private bool inConvo = false;
+    [Header("ConvoHolders")]
+    private ConvoSO placeInConvo;
     public void ConvoToggle(ConvoSO convoSO,GameObject newcCamSpot)
     {
         camSpot = newcCamSpot;
@@ -34,8 +42,11 @@ public class ConvoLogic : MonoBehaviour
             StartConvo(convoSO, newcCamSpot);
         }
     }
+
+    
     public void StartConvo(ConvoSO convoSO,GameObject newCamSpot)
     {
+        placeInConvo = convoSO; 
         camSpot = newCamSpot;
         player.playerCameraParent.transform.position = camSpot.transform.position;
         player.playerCameraParent.transform.rotation = camSpot.transform.rotation;
@@ -43,19 +54,21 @@ public class ConvoLogic : MonoBehaviour
         player.canMove = false;
         displayText.Clear();
         convoPanel.SetActive(true);
-        wantedText = convoSO.introSentance;
         iterator = 0;
-        StartCoroutine(DisplayText());
+        StartCoroutine(DisplayText(displayText, placeInConvo.mySentance));
+        DisplayChoices();
     }
 
     public void InputChoice(int num)
     {
+        print(num);
 
     }
 
     public void DisplayChoices()
     {
-
+        choiceOne.GetComponentInChildren<DisplayMyText>().DisplayTextOnUI(placeInConvo.sentances[0].mySentance);
+        choiceTwo.GetComponentInChildren<DisplayMyText>().DisplayTextOnUI(placeInConvo.sentances[1].mySentance);
     }
 
     private void EndConvo()
@@ -66,14 +79,14 @@ public class ConvoLogic : MonoBehaviour
         convoPanel.SetActive(false);
     }
 
-    private IEnumerator DisplayText()
+    private IEnumerator DisplayText(StringBuilder text,string wantedText)
     {
-        displayText.Append(wantedText[iterator]);
+        text.Append(wantedText[iterator]);
         iterator++;
         yield return new WaitForSeconds(0.1f);
         if (iterator != wantedText.Length)
         {
-            StartCoroutine(DisplayText());
+            StartCoroutine(DisplayText(text,wantedText));
         }
 
     }
@@ -87,5 +100,6 @@ public class ConvoLogic : MonoBehaviour
     void Update()
     {
         convoText.text = displayText.ToString();
+
     }
 }

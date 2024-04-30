@@ -584,7 +584,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                transform.localScale = new Vector3(1, 1.4f, 1);
+                transform.localScale = new Vector3(1, 1f, 1);
                 isCrouched = false;
                 speed = normalSpeed;
             }
