@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: TestConvo
   m_EditorClassIdentifier: 
   isShopKeeper: 0
-  mySentance: This is a text conversation!
+  mySentance: START SHOULD NOT SHOW
+  myResponce: This is a test!
   sentances:
   - {fileID: 11400000, guid: f957e96ec4d15984c802ebc9b65b2791, type: 2}
   - {fileID: 11400000, guid: 858185370b3c70442aaf393bf73e5168, type: 2}

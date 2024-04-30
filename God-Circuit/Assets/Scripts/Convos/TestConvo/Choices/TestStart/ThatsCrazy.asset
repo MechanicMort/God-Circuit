@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShopKeeper: 0
   mySentance: Wow thats crazy!
-  sentances: []
+  myResponce: Yeah it was crazy!
+  sentances:
+  - {fileID: 11400000, guid: ea9f2c970a916e04b8220d3de948af60, type: 2}
+  - {fileID: 11400000, guid: f957e96ec4d15984c802ebc9b65b2791, type: 2}

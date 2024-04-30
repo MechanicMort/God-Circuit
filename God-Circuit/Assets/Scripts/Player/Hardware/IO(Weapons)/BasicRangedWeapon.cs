@@ -14,7 +14,7 @@ public class BasicRangedWeapon : MonoBehaviour
     public float roundsRemaining;
     public bool needsToCharge;
     private WeaponAnims weaponAnims;
-
+    public bool isADS;
 
 
     private void Awake()
@@ -63,8 +63,17 @@ public class BasicRangedWeapon : MonoBehaviour
     {
         if (fireRateTicker == 0 && roundsRemaining !=0 && !needsToCharge)
         {
-            fireRateTicker = fireRate;     
-            weaponAnims.WeaponFired();
+            fireRateTicker = fireRate;
+            if (isADS)
+            {
+                weaponAnims.WeaponFired();
+            }
+            else
+            {
+
+            }
+        
+
             //add last round anim at some point
             return true;
         }

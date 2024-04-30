@@ -13,6 +13,7 @@ public class DisplayMyText : MonoBehaviour
     // Start is called before the first frame update
     public void DisplayTextOnUI(string textToDisplay)
     {
+        displayText.Clear();
         iterator = 0;
         StartCoroutine(DisplayText(displayText,textToDisplay));
     }
@@ -25,6 +26,7 @@ public class DisplayMyText : MonoBehaviour
     public void InputChoice()
     {
         GetComponentInParent<ConvoLogic>().InputChoice(Choice);
+      
     }
 
     private void Update()

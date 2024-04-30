@@ -55,20 +55,30 @@ public class ConvoLogic : MonoBehaviour
         displayText.Clear();
         convoPanel.SetActive(true);
         iterator = 0;
-        StartCoroutine(DisplayText(displayText, placeInConvo.mySentance));
+        StartCoroutine(DisplayText(displayText, placeInConvo.myResponce));
         DisplayChoices();
     }
 
     public void InputChoice(int num)
     {
         print(num);
-
+        StartConvo(placeInConvo.sentances[num],camSpot);
     }
 
     public void DisplayChoices()
     {
-        choiceOne.GetComponentInChildren<DisplayMyText>().DisplayTextOnUI(placeInConvo.sentances[0].mySentance);
-        choiceTwo.GetComponentInChildren<DisplayMyText>().DisplayTextOnUI(placeInConvo.sentances[1].mySentance);
+        if (placeInConvo.sentances[0] != null)
+        {
+            choiceOne.GetComponentInChildren<DisplayMyText>().DisplayTextOnUI(placeInConvo.sentances[0].mySentance);
+        }
+        if (placeInConvo.sentances[1] != null)
+        {
+            choiceTwo.GetComponentInChildren<DisplayMyText>().DisplayTextOnUI(placeInConvo.sentances[1].mySentance);
+        }
+        if (placeInConvo.sentances[2] != null)
+        {
+            choiceThree.GetComponentInChildren<DisplayMyText>().DisplayTextOnUI(placeInConvo.sentances[2].mySentance);
+        }
     }
 
     private void EndConvo()

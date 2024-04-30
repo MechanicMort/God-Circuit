@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShopKeeper: 0
   mySentance: Sorry that hapened!
-  sentances: []
+  myResponce: What do you mean your sorry?
+  sentances:
+  - {fileID: 11400000, guid: ea9f2c970a916e04b8220d3de948af60, type: 2}
+  - {fileID: 11400000, guid: 858185370b3c70442aaf393bf73e5168, type: 2}
