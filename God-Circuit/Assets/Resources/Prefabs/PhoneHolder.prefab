@@ -1093,7 +1093,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.745283, g: 0.03281113, b: 0.03281113, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2262,7 +2262,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -2320,7 +2320,6 @@ GameObject:
   - component: {fileID: 4896138032194941369}
   - component: {fileID: 4896138032194941370}
   - component: {fileID: 4896138032194941371}
-  - component: {fileID: 7246202080406120693}
   - component: {fileID: 4076438711248294881}
   m_Layer: 0
   m_Name: PhoneHolder
@@ -2345,7 +2344,7 @@ Transform:
   - {fileID: 4896138030596300646}
   - {fileID: 5086401529162661909}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4896138032194941369
 MonoBehaviour:
@@ -2360,7 +2359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phoneScreen: {fileID: 4896138030596300645}
-  itemCanvasManager: {fileID: 0}
+  itemCanvasManager: {fileID: 3143082512211081660}
   power: 0
   centreMeshRender: {fileID: 6720394245094180821}
   on: {fileID: 2100000, guid: b69656fa83f962f45a2c555a79b99389, type: 2}
@@ -2413,25 +2412,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5026531, y: 0.11352539, z: 0.7103348}
   m_Center: {x: 0.0028715134, y: 0.16331482, z: -0.0065193176}
---- !u!114 &7246202080406120693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4896138032194941351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e936598028fc598428e1205a287d927e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myItem: {fileID: 11400000, guid: 6a8a8520b4876a54d86abe3bf26730ac, type: 2}
-  itemHolder: {fileID: 4076438711248294881}
-  itemNameText: {fileID: 6513576375556823305}
-  itemCostText: {fileID: 7273222119078415129}
-  Image: {fileID: 1047671465631470010}
-  panel: {fileID: 8009620333429749599}
-  inInv: 0
 --- !u!114 &4076438711248294881
 MonoBehaviour:
   m_ObjectHideFlags: 0

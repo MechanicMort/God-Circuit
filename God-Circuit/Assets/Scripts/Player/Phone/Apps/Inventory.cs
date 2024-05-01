@@ -3,44 +3,91 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class Inventory : MonoBehaviour
 {
-    public GameObject[] inventory = new GameObject[6];
-    public Sprite[] inventoryImages = new Sprite[6];
-    public Image[] imageUIElements = new Image[6];
+    public Sprite defaultSprite;
+    public GameObject playerInvHolder;
+    public List<GameObject> inventory = new List<GameObject>();
+    public List<Sprite> inventoryImages = new List<Sprite>();
+    public List<Image> imageUIElements = new List<Image>();
+    public Transform dropLocation;
+    private int inventorySize = 6;
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerInvHolder = GameObject.FindGameObjectWithTag("InvHolder");
     }
 
     public void AddItem( GameObject newItem,Sprite image)
     {
         print("adding item");
-        for (int i = 0; i < inventory.Length; i++)
+        if (inventory.Count < inventorySize)
         {
-            if (inventory[i] == null)
-            {
-                inventory[i] = newItem;
-                inventoryImages[i] = image;
-                newItem.SetActive(false);
-                UpdateScreen();
-                print("Added Item");
-                return;
-            }
+            inventory.Add(newItem);
+            inventoryImages.Add(image);
+              
+            newItem.transform.SetParent(playerInvHolder.transform);
+            newItem.SetActive(false);
+            UpdateScreen();
+            print("Added Item");
+            return;
         }
-        print("Inventory Full");
+        else
+        {
+            print("Inventory Full");
+        }
+  
+    }
+
+    public void DropItem(GameObject button)
+    {
+        if (button.GetComponentInParent<Pointer>().pointToObject == null)
+        {
+            print("NoObject");
+           
+        }
+        else
+        {
+            GameObject manipObject = button.GetComponentInParent<Pointer>().pointToObject;
+            print("Dropping" + manipObject.name);
+            inventory.Remove(manipObject);
+            inventoryImages.Remove(manipObject.GetComponent<ItemHolder>().item.itemImage);
+            manipObject.transform.SetParent(null);
+            manipObject.transform.position = dropLocation.position;
+            manipObject.SetActive(true);
+            UpdateScreen();
+
+
+        }
+      
     }
 
     public void UpdateScreen()
     {
-        for (int i = 0; i < inventory.Length; i++)
+        for (int i = 0; i < imageUIElements.Count; i++)
         {
-            if (inventory[i] != null)
+            if (i >= inventory.Count)
             {
-                imageUIElements[i].sprite = inventoryImages[i];
+                imageUIElements[i].sprite = defaultSprite;
+                imageUIElements[i].transform.GetComponent<Pointer>().pointToObject = null;
             }
+            else
+            {
+                if (inventory[i] != null)
+                {
+                    imageUIElements[i].sprite = inventoryImages[i];
+                    imageUIElements[i].transform.GetComponent<Pointer>().pointToObject = inventory[i];
+                }
+                else
+                {
+                    imageUIElements[i].sprite = defaultSprite;
+                    imageUIElements[i].transform.GetComponent<Pointer>().pointToObject = null;
+                }
+            }
+          
         }
     }
 
