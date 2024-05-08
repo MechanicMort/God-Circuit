@@ -48,7 +48,7 @@ public class Customer : BaseAI
 
     public void StartConvo()
     {
-        convoLogic.StartConvo(myConvo,convoCam);
+       // convoLogic.StartConvo(myConvo,convoCam);
     }
     private void GiveMoney(float moneyNeeded)
     {

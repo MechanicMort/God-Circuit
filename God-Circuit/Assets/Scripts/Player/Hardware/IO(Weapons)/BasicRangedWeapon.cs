@@ -64,9 +64,11 @@ public class BasicRangedWeapon : MonoBehaviour
         if (fireRateTicker == 0 && roundsRemaining !=0 && !needsToCharge)
         {
             fireRateTicker = fireRate;
+            weaponAnims.WeaponFired();
+            //add an ads animation
             if (isADS)
             {
-                weaponAnims.WeaponFired();
+                
             }
             else
             {

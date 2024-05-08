@@ -13,15 +13,14 @@ public class ConvoLogic : MonoBehaviour
    int iterator =0;
 
     [Header("UIObjects")]
-
-    public GameObject choiceOne;
-    public GameObject choiceTwo;
-    public GameObject choiceThree;
+    public GameObject[] choiceUIObjects = new GameObject[3];
     public TMP_Text convoText;
     StringBuilder displayText = new StringBuilder();
     StringBuilder choiceOneDisplayText = new StringBuilder();
     StringBuilder choiceTwoDisplayText = new StringBuilder();
     StringBuilder choiceThreeDisplayText = new StringBuilder();
+
+    public GameObject shopPanel;
 
 
     private bool inConvo = false;
@@ -39,12 +38,12 @@ public class ConvoLogic : MonoBehaviour
         {
 
             inConvo = !inConvo;
-            StartConvo(convoSO, newcCamSpot);
+            StartConvo(convoSO, newcCamSpot,convoSO.isShopKeeper);
         }
     }
 
     
-    public void StartConvo(ConvoSO convoSO,GameObject newCamSpot)
+    public void StartConvo(ConvoSO convoSO,GameObject newCamSpot,bool shopPanel)
     {
         placeInConvo = convoSO; 
         camSpot = newCamSpot;
@@ -56,28 +55,49 @@ public class ConvoLogic : MonoBehaviour
         convoPanel.SetActive(true);
         iterator = 0;
         StartCoroutine(DisplayText(displayText, placeInConvo.myResponce));
-        DisplayChoices();
+        if (placeInConvo.isShopKeeper)
+        {
+            DisplayShop();
+        }
+        else
+        {
+            DisplayChoices();
+
+        }
     }
 
+
+    public void DisplayShop()
+    {
+        GameObject[] keepers = GameObject.FindGameObjectsWithTag("ShopKeeper");
+        GameObject wantedKeeper  = null;
+        float dist = Mathf.Infinity;
+        for (int i = 0; i < keepers.Length; i++)
+        {
+            if (Vector3.Distance(transform.position, keepers[i].transform.position) < dist)
+            {
+                dist = Vector3.Distance(transform.position, keepers[i].transform.position);
+                wantedKeeper = keepers[i];
+            }
+        }
+        if (wantedKeeper != null)
+        {
+
+            wantedKeeper.GetComponent<ConvoHolder>().shopInterface.SetActive(true);
+        }
+    }
+        
     public void InputChoice(int num)
     {
         print(num);
-        StartConvo(placeInConvo.sentances[num],camSpot);
+        StartConvo(placeInConvo.sentances[num], camSpot, placeInConvo.sentances[num].isShopKeeper);
     }
 
     public void DisplayChoices()
     {
-        if (placeInConvo.sentances[0] != null)
+        for (int i =0; i <placeInConvo.sentances.Count;i++)
         {
-            choiceOne.GetComponentInChildren<DisplayMyText>().DisplayTextOnUI(placeInConvo.sentances[0].mySentance);
-        }
-        if (placeInConvo.sentances[1] != null)
-        {
-            choiceTwo.GetComponentInChildren<DisplayMyText>().DisplayTextOnUI(placeInConvo.sentances[1].mySentance);
-        }
-        if (placeInConvo.sentances[2] != null)
-        {
-            choiceThree.GetComponentInChildren<DisplayMyText>().DisplayTextOnUI(placeInConvo.sentances[2].mySentance);
+            choiceUIObjects[i].GetComponentInChildren<DisplayMyText>().DisplayTextOnUI(placeInConvo.sentances[i].mySentance);
         }
     }
 
@@ -110,6 +130,9 @@ public class ConvoLogic : MonoBehaviour
     void Update()
     {
         convoText.text = displayText.ToString();
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            EndConvo();
+        }
     }
 }

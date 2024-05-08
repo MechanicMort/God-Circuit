@@ -7,6 +7,7 @@ using UnityEngine;
 public class ConvoSO : ScriptableObject
 {
     public bool isShopKeeper;
+   
     public string mySentance;
     public string myResponce;
 

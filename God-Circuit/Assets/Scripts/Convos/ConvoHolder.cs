@@ -6,6 +6,8 @@ public class ConvoHolder : MonoBehaviour
 {
    public ConvoSO convoSO;
    public GameObject camSpot;
+    public GameObject shopInterface;
+
     public void StartConvo()
     {
         print("Starting convo");

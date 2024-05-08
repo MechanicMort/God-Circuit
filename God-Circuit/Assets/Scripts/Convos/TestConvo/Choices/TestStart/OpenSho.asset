@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1aac3ad12f211404295e8a0ad3be2529, type: 3}
-  m_Name: TestConvo
+  m_Name: OpenSho
   m_EditorClassIdentifier: 
-  isShopKeeper: 0
-  mySentance: START SHOULD NOT SHOW
-  myResponce: This is a test!
+  isShopKeeper: 1
+  mySentance: Open Shop!
+  myResponce: Please take a look!
   sentances:
   - {fileID: 11400000, guid: f957e96ec4d15984c802ebc9b65b2791, type: 2}
+  - {fileID: 11400000, guid: ea9f2c970a916e04b8220d3de948af60, type: 2}
   - {fileID: 11400000, guid: 858185370b3c70442aaf393bf73e5168, type: 2}
-  - {fileID: 11400000, guid: b575f5689c433a84e9ef76283b1efaf8, type: 2}
