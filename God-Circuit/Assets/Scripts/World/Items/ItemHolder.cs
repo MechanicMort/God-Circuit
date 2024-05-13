@@ -6,15 +6,19 @@ public class ItemHolder : MonoBehaviour
 {
     public OverWorldItem item;
     public bool isWeapon;
-
+    public bool canBePickedUp;
     public bool inBasket;
     public void PickupItem()
     {
-        print("Should Add Item");
-        if (!isWeapon)
+        if (canBePickedUp)
         {
-            GameObject.FindGameObjectWithTag("Phone").GetComponent<Inventory>().AddItem(this.gameObject, item.itemImage);
+            print("Should Add Item");
+            if (!isWeapon)
+            {
+                GameObject.FindGameObjectWithTag("Phone").GetComponent<Inventory>().AddItem(this.gameObject, item.itemImage);
+            }
         }
+ 
        
     }
 

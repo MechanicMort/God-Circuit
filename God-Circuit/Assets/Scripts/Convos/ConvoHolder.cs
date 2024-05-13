@@ -11,6 +11,7 @@ public class ConvoHolder : MonoBehaviour
     public void StartConvo()
     {
         print("Starting convo");
+        Cursor.lockState = CursorLockMode.Locked;
         GameObject.FindGameObjectWithTag("ConvoPanel").GetComponent<ConvoLogic>().ConvoToggle(convoSO, camSpot);
     }
 }

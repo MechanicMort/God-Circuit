@@ -20,7 +20,7 @@ public class ItemCanvasManager : MonoBehaviour
         myItem = itemHolder.item;
         Image.sprite = myItem.itemImage;
         itemNameText.text = myItem.itemName;
-        itemCostText.text = "£" + myItem.itemCost.ToString();
+        itemCostText.text = "£" + myItem.itemCost/100;
 
     }
 

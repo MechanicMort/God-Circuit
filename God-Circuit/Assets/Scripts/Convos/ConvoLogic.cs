@@ -58,6 +58,7 @@ public class ConvoLogic : MonoBehaviour
         if (placeInConvo.isShopKeeper)
         {
             DisplayShop();
+            convoPanel.SetActive(false);
         }
         else
         {
