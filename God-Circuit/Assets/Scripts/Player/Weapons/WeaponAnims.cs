@@ -8,7 +8,6 @@ public class WeaponAnims : MonoBehaviour
 
     public Animator anim;
     public GameObject weaponsCase;
-    public GameObject weaponsBullet;
     public GameObject muzzleFlash;
     public float flashChance;
     private BasicRangedWeapon BasicRangedWeapon;
@@ -35,15 +34,24 @@ public class WeaponAnims : MonoBehaviour
     }
     public void WeaponFired()
     {
-        //    print("FirAnim");
+            print("FirAnim");
          anim.SetTrigger("Shot");
-    //    rgb.AddForce(transform.forward * recoil);
-        if (Random.Range(0, flashChance) == 1) {
-            for (int i = 0; i < muzzleFlash.GetComponentsInChildren<ParticleSystem>().Length; i++)
+        //    rgb.AddForce(transform.forward * recoil);
+
+        if (muzzleFlash != null)
+        {
+            if (Random.Range(0, flashChance) == 1)
             {
-                muzzleFlash.GetComponentsInChildren<ParticleSystem>()[i].Play();
+                for (int i = 0; i < muzzleFlash.GetComponentsInChildren<ParticleSystem>().Length; i++)
+                {
+                    muzzleFlash.GetComponentsInChildren<ParticleSystem>()[i].Play();
+                }
             }
-        } ;
+        }
+        //eject brass here
+       // Instantiate(weaponsCase);
+
+        
     }
 
     // Update is called once per frame

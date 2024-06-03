@@ -5,6 +5,7 @@ using UnityEngine;
 public class BasicRangedWeapon : MonoBehaviour
 {
     public Transform gunBarrel;
+    public GameObject projectile;
     // FIRE RATE IS TIME INBETWEEN SHOTS  
     public float fireRate;
     public float fireRateTicker = 0;
@@ -15,6 +16,7 @@ public class BasicRangedWeapon : MonoBehaviour
     public bool needsToCharge;
     private WeaponAnims weaponAnims;
     public bool isADS;
+    public bool isFishingRod;
 
 
     private void Awake()
@@ -61,7 +63,7 @@ public class BasicRangedWeapon : MonoBehaviour
 
     public bool FireWeapon( )
     {
-        if (fireRateTicker == 0 && roundsRemaining !=0 && !needsToCharge)
+        if (fireRateTicker == 0 && roundsRemaining >=1 && !needsToCharge && !isFishingRod)
         {
             fireRateTicker = fireRate;
             weaponAnims.WeaponFired();
@@ -74,15 +76,24 @@ public class BasicRangedWeapon : MonoBehaviour
             {
 
             }
-        
+
 
             //add last round anim at some point
+            CreatePorjectile(projectile);
+            return true;
+        }
+        else if (isFishingRod && roundsRemaining !=0)
+        {
+            print("FishingInit");
+            weaponAnims.WeaponFired();
+            CreatePorjectile(projectile);
             return true;
         }
         else
         {
             return false;
         }
+       // return false;
 
     }
 }

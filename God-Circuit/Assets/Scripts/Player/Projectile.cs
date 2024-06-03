@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     public float damage;
     public float speed;
     private Rigidbody rb;
+    public bool destroyOnContact;
 
     private void Start()
     {
@@ -22,7 +23,11 @@ public class Projectile : MonoBehaviour
         }
         print("Collision with" + collision.transform.name);
         //LIKE DO STUFF AND LIKE EFFECTS KABOOOM
-        Destroy(this.gameObject);
+        if (destroyOnContact)
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,8 +39,12 @@ public class Projectile : MonoBehaviour
                 Destroy(this.gameObject);
             }
             print("Collision with" + other.transform.name);
-            //LIKE DO STUFF AND LIKE EFFECTS KABOOOM
+        //LIKE DO STUFF AND LIKE EFFECTS KABOOOM
+        if (destroyOnContact)
+        {
             Destroy(this.gameObject);
+        }
+
         }
 
     public void FixedUpdate()

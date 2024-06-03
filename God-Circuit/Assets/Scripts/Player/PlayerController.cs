@@ -317,7 +317,7 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    private void ResetCurrentWeapon()
+    private bool  ResetCurrentWeapon()
     {
         if (GameObject.FindGameObjectWithTag("CurrentWeapon"))
         {
@@ -327,8 +327,9 @@ public class PlayerController : MonoBehaviour
             weaponManip.transform.tag = "Weapon";
             weaponManip.transform.position = Vector3.zero;
             weaponManip.transform.rotation = quaternion.identity;
-
+           
         }
+        return true;
     }
 
     private IEnumerator AnimatorDelay(Animator aim)
@@ -344,11 +345,8 @@ public class PlayerController : MonoBehaviour
     {
         if (input == (KeyCode.Alpha1) && myWeapons[0] != null)
         {
-            print("WeaponsSwap");
             ResetCurrentWeapon();
             myWeapons[0].transform.parent = gunHolder.transform;
-            myWeapons[0].transform.position = Vector3.zero;
-            myWeapons[0].transform.rotation = Quaternion.identity;
             myWeapons[0].transform.tag = "CurrentWeapon";
             hasWeaponOut = true;
             StartCoroutine(AnimatorDelay(myWeapons[0].GetComponent<Animator>()));
@@ -360,21 +358,17 @@ public class PlayerController : MonoBehaviour
         {
             ResetCurrentWeapon();
             myWeapons[1].transform.parent = gunHolder.transform;
-            myWeapons[1].transform.position = Vector3.zero;
-            myWeapons[1].transform.rotation = Quaternion.identity;
-            myWeapons[1].GetComponent<Animator>().enabled = true;
             myWeapons[1].transform.tag = "CurrentWeapon";
             hasWeaponOut = true;
+            StartCoroutine(AnimatorDelay(myWeapons[1].GetComponent<Animator>()));
         }
         else if (input == KeyCode.Alpha3 && myWeapons[2] != null)
         {
             ResetCurrentWeapon();
             myWeapons[2].transform.parent = gunHolder.transform;
-            myWeapons[2].transform.position = Vector3.zero;
-            myWeapons[2].transform.rotation = Quaternion.identity;
-            myWeapons[2].GetComponent<Animator>().enabled = true;
             myWeapons[2].transform.tag = "CurrentWeapon";
             hasWeaponOut = true;
+            StartCoroutine(AnimatorDelay(myWeapons[2].GetComponent<Animator>()));
         }
 
         else if (input == KeyCode.Alpha4)
@@ -533,7 +527,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift) && Stamina != 0 && !stamDroppedLow && !isCrouched)
         {
-
+            print("Sprinting");
             speed = sprintSpeed; //Mathf.Lerp(speed,sprintSpeed,0.02f);
             Stamina -= staminaDrain * Time.deltaTime;
             drainwait = stamRecoverySpeed;
@@ -586,7 +580,6 @@ public class PlayerController : MonoBehaviour
             {
                 transform.localScale = new Vector3(1, 1f, 1);
                 isCrouched = false;
-                speed = normalSpeed;
             }
 
 

@@ -32,7 +32,7 @@ public class CPUBase : UIComponentSwap
     public float shield;
     public float shieldRecovery;
 
-    public float speed;
+    public float speed = 10.0f;
     public float sprintSpeed = 16.5f;
     public float normalSpeed = 10.5f;
     public float creouchSpeed = 6.5f;

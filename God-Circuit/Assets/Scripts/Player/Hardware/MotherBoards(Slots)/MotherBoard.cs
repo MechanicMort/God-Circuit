@@ -52,7 +52,7 @@ public class MotherBoard : MonoBehaviour
     public float airJumpsMax = 1;
     public float dashLength = 100;
     public float dashCoolDown = 100;
-    public float speed;
+    public float speed = 10.0f;
     public float sprintSpeed = 16.5f;
     public float normalSpeed = 10.5f;
     public float jumpSpeed = 8.0f;
@@ -214,7 +214,12 @@ public class MotherBoard : MonoBehaviour
                 StaminaMax += CPU[i].GetComponent<CPUBase>().StaminaMax;
                 hpMax += CPU[i].GetComponent<CPUBase>().hpMax;
                 shieldMax += CPU[i].GetComponent<CPUBase>().shieldMax;
+                
+                speed = CPU[i].GetComponent<CPUBase>().speed;
+                sprintSpeed += CPU[i].GetComponent<CPUBase>().sprintSpeed;
+
                 dashStamCost = CPU[i].GetComponent<CPUBase>().dashStamCost;
+                
                 staminaDrain = CPU[i].GetComponent<CPUBase>().staminaDrain;
                 staminaRecovery += CPU[i].GetComponent<CPUBase>().staminaRecovery;
                 hPRecovery += CPU[i].GetComponent<CPUBase>().hPRecovery;

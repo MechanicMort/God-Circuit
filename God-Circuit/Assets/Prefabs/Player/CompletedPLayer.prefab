@@ -3118,7 +3118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5891123911533513088}
   m_Layer: 0
-  m_Name: PlayerUI and Player Holder 1
+  m_Name: CompletedPLayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
