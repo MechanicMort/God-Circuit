@@ -6,6 +6,7 @@ using UnityEngine.Rendering.HighDefinition;
 
 public class Ocean : MonoBehaviour
 {
+    public float targetHeight;
     private WaterSurface surface;
     private WaterSearchParameters searchParameters;
     private WaterSearchResult result;
@@ -24,15 +25,15 @@ public class Ocean : MonoBehaviour
     void Update()
     {
 
-        searchParameters.startPosition = result.candidateLocation;
-        searchParameters.targetPosition = transform.position;
+        searchParameters.startPositionWS = result.candidateLocationWS;
+        searchParameters.targetPositionWS = transform.position;
 
         searchParameters.error = 0.01f;
         searchParameters.maxIterations = 8;
 
-        if (surface.FindWaterSurfaceHeight(searchParameters,out result))
+       // if (surface.FindWaterSurfaceHeight(searchParameters,out result))
         {
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x, result.height, gameObject.transform.position.z);
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, result.projectedPositionWS.y + targetHeight, gameObject.transform.position.z);
         }
 
 

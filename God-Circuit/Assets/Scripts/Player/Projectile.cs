@@ -49,7 +49,7 @@ public class Projectile : MonoBehaviour
 
     public void FixedUpdate()
     {
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
         rb.AddForce(transform.forward * speed);
