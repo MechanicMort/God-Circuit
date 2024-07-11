@@ -9,6 +9,7 @@ public class MoveCam : MonoBehaviour
     public float timeTakenToMove;
     public void MoveTheCam()
     {
+        target.gameObject.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         distanceNeededEachMove = Vector3.Distance(transform.position, target.position) / (timeTakenToMove / 0.01f);
         StartCoroutine(MoveTheCamTimer());
@@ -17,10 +18,11 @@ public class MoveCam : MonoBehaviour
     private IEnumerator MoveTheCamTimer()
     {
         transform.position = Vector3.Lerp(transform.position, target.position, distanceNeededEachMove);
+        transform.rotation = Quaternion.Lerp(transform.rotation, target.transform.rotation, distanceNeededEachMove);
         yield return new WaitForSeconds(0.01f);
-        if (Vector3.Distance(transform.position,target.position) < 0.1f)
+        if (Vector3.Distance(transform.position,target.position) < 0.25f)
         {
-            target.gameObject.SetActive(true);
+
             target.parent.GetComponent<BaseOverWorldController>().canMove = true;
             target.parent.GetComponent<BaseOverWorldController>().canTurn = true;
             transform.gameObject.SetActive(false);

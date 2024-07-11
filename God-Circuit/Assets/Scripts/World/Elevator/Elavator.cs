@@ -25,7 +25,7 @@ public class Elavator : MonoBehaviour
     {
         elevatorParent = transform.parent.gameObject;
         Collider = GetComponent<BoxCollider>();
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.FindWithTag("Player").transform.parent.gameObject;
     }
 
 

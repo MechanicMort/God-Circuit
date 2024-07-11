@@ -85,7 +85,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   skyIntensityMode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   exposure:
     m_OverrideState: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   atmosphericScattering:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   renderingMode:
     m_OverrideState: 0
@@ -140,19 +140,19 @@ MonoBehaviour:
     m_Value: 55261.973
   aerosolDensity:
     m_OverrideState: 1
-    m_Value: 0.095
+    m_Value: 0
   aerosolTint:
     m_OverrideState: 0
     m_Value: {r: 0.9, g: 0.9, b: 0.9, a: 1}
   aerosolMaximumAltitude:
     m_OverrideState: 0
-    m_Value: 8289.296
+    m_Value: 8224.73
   aerosolAnisotropy:
     m_OverrideState: 0
     m_Value: 0
   ozoneDensityDimmer:
     m_OverrideState: 0
-    m_Value: 1
+    m_Value: 0.236
   ozoneMinimumAltitude:
     m_OverrideState: 0
     m_Value: 20000
@@ -193,7 +193,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   horizonTint:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   zenithTint:
     m_OverrideState: 0
@@ -253,13 +253,13 @@ MonoBehaviour:
     m_Value: 1000
   baseHeight:
     m_OverrideState: 1
-    m_Value: -2633.6
+    m_Value: 3588
   maximumHeight:
     m_OverrideState: 1
     m_Value: 4425
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 752.9
+    m_Value: 1010.3
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1
@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf384b154398e341b6b29969c078198, type: 3}
   m_Name: MotionBlur
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   quality:
     m_OverrideState: 0
     m_Value: 1
@@ -765,10 +765,10 @@ MonoBehaviour:
     m_Value: {x: 0, y: 0}
   bottomAltitude:
     m_OverrideState: 1
-    m_Value: 3000
+    m_Value: 274.2
   altitudeRange:
     m_OverrideState: 1
-    m_Value: 1000
+    m_Value: 2000
   fadeInMode:
     m_OverrideState: 1
     m_Value: 0
@@ -796,11 +796,11 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0
   cloudSimpleMode:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
   m_CloudPreset:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 4
   cumulusMap:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -844,16 +844,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.05
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.75
+        time: 0.15
         value: 1
         inSlope: 0
         outSlope: 0
@@ -863,7 +854,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 1
-        value: 0
+        value: 0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -924,7 +915,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 0.25
-        value: 0.5
+        value: 0.4
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -957,7 +948,7 @@ MonoBehaviour:
     m_Value: 0.4
   shapeFactor:
     m_OverrideState: 1
-    m_Value: 0.95
+    m_Value: 0.875
   shapeScale:
     m_OverrideState: 1
     m_Value: 5
@@ -966,10 +957,10 @@ MonoBehaviour:
     m_Value: {x: 0, y: 0, z: 0}
   erosionFactor:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 0.9
   erosionScale:
     m_OverrideState: 1
-    m_Value: 107
+    m_Value: 75
   erosionNoiseType:
     m_OverrideState: 1
     m_Value: 1
@@ -977,11 +968,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   microErosionFactor:
-    m_OverrideState: 0
-    m_Value: 0.5
+    m_OverrideState: 1
+    m_Value: 0.65
   microErosionScale:
-    m_OverrideState: 0
-    m_Value: 200
+    m_OverrideState: 1
+    m_Value: 300
   ambientLightProbeDimmer:
     m_OverrideState: 0
     m_Value: 1

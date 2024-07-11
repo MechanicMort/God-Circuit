@@ -42,7 +42,7 @@ public class Train : MonoBehaviour
 
         if (other.transform.tag == "Player")
         {
-            other.transform.SetParent(this.transform,true);
+            other.transform.parent.SetParent(this.transform,true);
             //other.GetComponent<CharacterController>().enabled = false;
             print("Parent");
         }
@@ -51,7 +51,7 @@ public class Train : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
-            other.transform.SetParent(null, true);
+            other.transform.parent.SetParent(null, true);
             //other.GetComponent<CharacterController>().enabled = false;
             print("Parent");
         }

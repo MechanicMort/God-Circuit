@@ -48,6 +48,7 @@ public class BaseOverWorldController : MonoBehaviour
 
     void Start()
     {
+        
         playerController = GetComponent<PlayerController>();
         DontDestroyOnLoad(this);
         characterController = GetComponent<CharacterController>();

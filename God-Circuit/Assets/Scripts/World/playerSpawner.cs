@@ -5,9 +5,23 @@ using UnityEngine;
 public class playerSpawner : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    public bool inBed = false;
+    private GameObject player;
+    void Awake()
     {
-    GameObject player =   GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.SetParent(null, true);
+        player.GetComponentInChildren<CharacterController>().transform.position = transform.position;
+     
+        if (inBed )
+        {
+            StartCoroutine(BedStart());
+        }
+    }
+
+    private IEnumerator BedStart() {
+        yield return new WaitForEndOfFrame();
+
         player.transform.position = transform.position;
     }
 
